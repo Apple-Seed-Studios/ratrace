@@ -1,0 +1,11 @@
+{
+  "name": "ratrace-server",
+  "version": "1.0.0",
+  "description": "Server for Rat Race Todos",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC"
+}
