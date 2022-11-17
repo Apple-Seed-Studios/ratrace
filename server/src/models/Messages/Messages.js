@@ -10,7 +10,7 @@ const { Schema } = mongoose;
 const messageSchema = new Schema({
 
   name: {type: String, required: true},
-  score: {type: Number, required: true},
+  message: {type: String, required: true},
   // email: {type: String, required: true}
 
 });

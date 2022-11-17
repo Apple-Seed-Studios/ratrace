@@ -12,18 +12,18 @@ const mongoose = require('mongoose');
 
 
 
-const handleHelloWorld= require('../routes/route').handleHelloWorld;
+const { handleHelloWorld, getMessage, postMessage } = require('./routes/route');
 
 
-// // add validation to confirm we are wired up to our mongo DB
-// const db = mongoose.connection;
-// db.on('error', console.error.bind(console, 'connection error:'));
-// db.once('open', function () {
-//   console.log('Mongoose is listening');
-// });
+// add validation to confirm we are wired up to our mongo DB
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function () {
+  console.log('Mongoose is listening');
+});
 
-// //connect mongoose to mongo
-// mongoose.connect(process.env.DB_URL);
+//connect mongoose to mongo
+mongoose.connect(process.env.DB_URL);
 
 
 //USE
@@ -39,6 +39,8 @@ app.get('/', (req,res) => {
 });
 
 app.get('/hello', handleHelloWorld)
+app.get('/messages', getMessage)
+app.post('/messages', postMessage)
 
 module.exports = {
   app,
