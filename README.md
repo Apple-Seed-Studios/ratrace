@@ -9,6 +9,11 @@ A todo app that gets you to work!
 ![diagram](docs/images/whiteboard.png)
 ![wireframe](docs/images/wireframe.jpg)
 
+
+### UI Diagram
+
+![UI Diagram](https://share.balsamiq.com/c/dw9XRTqxQKZSETtBVrWKGJ.png)
+
 ## Installation
 
 Clone this repository.
