@@ -9,6 +9,7 @@ const addTask = (payload) => {
 
 }
 
+
 const taskReducer = (state=tasks, action) => {
     if (!action) return state;
     switch(action.type){
