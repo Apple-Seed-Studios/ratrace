@@ -7,6 +7,7 @@ A todo app that gets you to work!
 ## Diagram
 
 ![diagram](docs/images/whiteboard.png)
+![wireframe](docs/images/wireframe.jpg)
 
 
 ### UI Diagram
