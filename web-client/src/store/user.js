@@ -11,8 +11,7 @@ const logIn = (payload) => async(dispatch) => {
 
 const userReducer =(state=loggedIn, action) => {
     switch(action.type){
-        case 'LOG_IN': console.log(state) 
-        return state = !state;
+        case 'LOG_IN': return state = !state;
         default: return state;
     }
 }

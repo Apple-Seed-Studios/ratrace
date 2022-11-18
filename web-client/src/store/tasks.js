@@ -53,6 +53,7 @@ const addTask = (payload) => {
 
 }
 
+
 const taskReducer = (state=initialState, action) => {
     switch(action.type){
         case 'SET_TASK':
