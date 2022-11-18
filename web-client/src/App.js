@@ -1,16 +1,15 @@
-import Login from './components/Login/index';
 import LandingPage from './components/LandingPage'
 import { Provider } from 'react-redux';
 import store from './store';
-import IsAuthorized from './context/isAuthorized';
+import TaskForm from './components/TaskForm'
+import TaskDisplay from './components/TaskDisplay';
 
 function App() {
   return (<>
   <Provider store={store}>
-  <Login/>
-  <IsAuthorized>
+  <TaskForm/>
+  <TaskDisplay/>
   <LandingPage/>
-  </IsAuthorized>
   </Provider>
   </>);
 }
