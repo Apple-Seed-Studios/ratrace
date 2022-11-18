@@ -7,6 +7,7 @@ A todo app that gets you to work!
 ## Diagram
 
 ![diagram](docs/images/whiteboard.png)
+![wireframe](docs/images/wireframe.jpg)
 
 ## Installation
 
@@ -19,7 +20,11 @@ Download the dependencies.
     cd server; npm install; cd ..
     cd web-client; npm install; cd ..
 
-Update your env variables in `server/env` and `web-client/env`
+Update your env variables in `server/.env` and `web-client/.env`
+
+Add this to `server/.env`
+
+    PORT=3001
 
 Start the server...
 
