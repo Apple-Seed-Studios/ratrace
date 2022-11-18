@@ -29,8 +29,8 @@ const TaskForm = function () {
         <DialogTitle>Add task</DialogTitle>
         <DialogContent>
             <form onSubmit={handleSubmit}>
-            <TextField label='Task Name' id='task_name'></TextField>
-            <TextField label='Description' id='task_description'></TextField>
+            <TextField label='Task Name' id='task_name' required></TextField>
+            <TextField label='Description' id='task_description' required></TextField>
             <Button type='submit' onClick={toggleForm} variant='outlined'>Submit</Button>
             </form>
         </DialogContent>
