@@ -3,7 +3,8 @@ import { Fab, TextField } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit'
 import { useState, useEffect } from 'react';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import { decrementTime, setTime } from '../../store/timer';
+//import { decrementTime, setTime } from '../../store/timer';
+import { decrementTime } from '../../store/timer';
 import PauseIcon from '@mui/icons-material/Pause';
 
 
