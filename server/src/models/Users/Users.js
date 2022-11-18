@@ -7,17 +7,17 @@ const mongoose=require('mongoose');
 const { Schema } = mongoose;
 
 //declare the book schema
-const messageSchema = new Schema({
+const userSchema = new Schema({
 
+  email: {type: String, required: true},
   name: {type: String, required: true},
-  message: {type: String, required: true},
-  // email: {type: String, required: true}
+  password: {type: String, required: true},
 
 });
 
 // define the model
 
 // allows our `Model` to use `mongoose` methods
-const Messages = mongoose.model('Message', messageSchema);
+const Users = mongoose.model('User', userSchema);
 
-module.exports = Messages;
+module.exports = Users;

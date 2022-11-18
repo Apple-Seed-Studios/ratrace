@@ -6,6 +6,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const v1 = require('./routes/v1')
 // const verifyUser = require('./auth');
 
 
@@ -38,6 +39,7 @@ app.get('/', (req,res) => {
   res.send('hello');
 });
 
+app.use('/api/v1', v1);
 app.get('/hello', handleHelloWorld)
 app.get('/messages', getMessage)
 app.post('/messages', postMessage)

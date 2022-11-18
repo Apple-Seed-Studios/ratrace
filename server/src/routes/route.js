@@ -1,4 +1,4 @@
-const MessageModel = require('../models/Messages/Messages.js')
+const Messages = require('../models/Messages/Messages.js')
 
 
 async function handleHelloWorld(req, res) {
@@ -9,7 +9,7 @@ async function handleHelloWorld(req, res) {
 
 async function postMessage(request, response, next) {
   try {
-    let createdMessage = await MessageModel.create(request.body);
+    let createdMessage = await Messages.create(request.body);
     response.status(200).send(createdMessage);
   } catch (e) {
     next(e);
@@ -18,7 +18,7 @@ async function postMessage(request, response, next) {
 
 async function getMessage(request, response, next) {
   try {
-    let results = await MessageModel.find({});
+    let results = await Messages.find({});
     response.status(200).send(results);
   }
   catch (e) {
