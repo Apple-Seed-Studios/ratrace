@@ -54,7 +54,7 @@ const addTask = (payload) => {
 }
 
 
-const taskReducer = (state=initialState, action) => {
+const taskReducer = (state=tasks, action) => {
     switch(action.type){
         case 'SET_TASK':
             return {
@@ -78,7 +78,4 @@ const taskReducer = (state=initialState, action) => {
     }
 }
 
-module.exports = {
-    addTask,
-    taskReducer,
-}
+export { addTask, taskReducer };

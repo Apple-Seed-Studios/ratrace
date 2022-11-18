@@ -15,7 +15,8 @@ const userReducer =(state=loggedIn, action) => {
         default: return state;
     }
 }
-module.exports = {
+
+export  {
     userReducer,
     logIn,
 }
