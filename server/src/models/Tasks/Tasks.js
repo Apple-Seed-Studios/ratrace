@@ -9,9 +9,10 @@ const { Schema } = mongoose;
 //declare the book schema
 const taskSchema = new Schema({
 
-  email: {type: String, required: true},
-  content: {type: String, required: true},
-  details: {type: String, required: true},
+  // email: {type: String, required: true},
+  task_name: {type: String, required: true},
+  task_description: {type: String, required: true},
+  completed: {type:Boolean, required: true},
   // categories: {type: Array, required: true},
 
 });
