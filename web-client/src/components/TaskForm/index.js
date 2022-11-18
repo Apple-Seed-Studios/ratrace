@@ -5,13 +5,15 @@ import { useState } from 'react';
 import { addTask } from '../../store/tasks';
 
 
-const TaskForm = function () {
-    
+const TaskForm = function ()
+{
+
     let dispatch = useDispatch();
     let tasks = useSelector(state => state.tasks)
-    let [ showForm, setShowForm] = useState(false);
+    let [ showForm, setShowForm ] = useState(false);
 
-    let handleSubmit = (e) => {
+    let handleSubmit = (e) =>
+    {
         e.preventDefault();
         dispatch(addTask({
             task_name: e.target.task_name.value,
@@ -19,24 +21,27 @@ const TaskForm = function () {
         }))
         console.log(tasks)
     }
-    const toggleForm = () => {
+    const toggleForm = () =>
+    {
         setShowForm(!showForm);
     }
 
 
-    return (<>
-    <Dialog open={showForm} onClose={toggleForm}>
-        <DialogTitle>Add task</DialogTitle>
-        <DialogContent>
-            <form onSubmit={handleSubmit}>
-            <TextField label='Task Name' id='task_name'></TextField>
-            <TextField label='Description' id='task_description'></TextField>
-            <Button type='submit' onClick={toggleForm} variant='outlined'>Submit</Button>
-            </form>
-        </DialogContent>
-    </Dialog>
-    <Button variant='contained' onClick={toggleForm}>+ Task</Button>
-    </>)
+    return (
+        <>
+            <Dialog open={ showForm } onClose={ toggleForm }>
+                <DialogTitle>Add task</DialogTitle>
+                <DialogContent>
+                    <form onSubmit={ handleSubmit }>
+                        <TextField label='Task Name' id='task_name'></TextField>
+                        <TextField label='Description' id='task_description'></TextField>
+                        <Button type='submit' onClick={ toggleForm } variant='outlined'>Submit</Button>
+                    </form>
+                </DialogContent>
+            </Dialog>
+            <Button variant='contained' onClick={ toggleForm }>+ Task</Button>
+        </>
+    )
 }
 
 export default TaskForm;

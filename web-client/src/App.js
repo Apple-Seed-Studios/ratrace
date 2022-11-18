@@ -1,16 +1,17 @@
-import LandingPage from './components/LandingPage'
 import { Provider } from 'react-redux';
 import store from './store';
-import TaskForm from './components/TaskForm'
-import TaskDisplay from './components/TaskDisplay';
+
+import Header from './components/Header/index';
+import Footer from './components/Footer/index';
+import Main from './components/Main/index';
 
 function App()
 {
   return (<>
     <Provider store={ store }>
-      <TaskForm />
-      <TaskDisplay />
-      <LandingPage />
+      <Header />
+      <Main />
+      <Footer />
     </Provider>
   </>);
 }
