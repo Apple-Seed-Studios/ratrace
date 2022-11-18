@@ -1,6 +1,7 @@
 const tasks = [];
 
 const addTask = (payload) => {
+    payload.completed = false;
     return {
         type: 'ADD_TASK',
         payload: payload,
