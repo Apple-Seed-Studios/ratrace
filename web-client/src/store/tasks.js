@@ -2,7 +2,7 @@ import axios from 'axios';
 const API_SERVER=process.env.REACT_APP_SERVER;
 
 const initialState = {
-    tasks = []
+    tasks: []
 };
 
 
