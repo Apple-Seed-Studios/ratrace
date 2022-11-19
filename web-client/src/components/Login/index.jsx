@@ -1,5 +1,6 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import { When } from 'react-if';
 
 const Login = () =>
 {
@@ -10,7 +11,7 @@ const Login = () =>
         return <div>Loading ...</div>;
     }
     return (
-        isAuthenticated && (
+        <When condition={ isAuthenticated }>
             <>
                 <div className="login">
                     <img
@@ -22,7 +23,8 @@ const Login = () =>
                     <p>{ user.email }</p>
                 </div>
             </>
-        )
+        </When>
+    )
     )
 }
 
