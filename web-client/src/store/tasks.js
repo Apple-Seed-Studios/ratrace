@@ -5,7 +5,6 @@ const API_SERVER = process.env.REACT_APP_SERVER;
 const initialState = [];
 
 
-
 export const getTasks = () => async (dispatch) => {
   let response = await axios.get(`${API_SERVER}/api/v1/tasks`);
   dispatch({
@@ -16,15 +15,12 @@ export const getTasks = () => async (dispatch) => {
   // dispatch(setTask(data.results));
 }
 
-
-
 export const setTask = (tasks) => {
   return {
     type: 'SET_TASK',
     payload: tasks,
   }
 }
-
 
 export const addTaskRaw = (axios) => (payload) => async (dispatch) => {
   payload.completed = false;
@@ -59,7 +55,6 @@ export const deleteTask = (payload) => async (dispatch) => {
 
 }
 
-
 const taskReducer = (state = initialState, action) => {
   if(!action) return state;
   switch (action.type) {
@@ -75,7 +70,6 @@ const taskReducer = (state = initialState, action) => {
     default: return state;
   }
 }
-
 
 const addTask = addTaskRaw(axios);
 export { addTask, taskReducer };
