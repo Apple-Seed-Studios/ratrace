@@ -5,9 +5,14 @@ import Typography from '@mui/material/Typography';
 import ThemeButton from './ThemeButton';
 import './header.scss';
 import { Divider } from '@mui/material/'
+import AvatarPic from './Avatar';
+import { useAuth0 } from "@auth0/auth0-react";
+import { When } from 'react-if';
+import LogoutButton from '../Login/LogoutButton';
 
 function Header(props)
 {
+  const { isAuthenticated } = useAuth0();
   return (
     <AppBar
       position="relative"
@@ -25,6 +30,10 @@ function Header(props)
         </Typography>
         <div className='navLeftButtons'>
           <ThemeButton />
+          <When condition={ isAuthenticated }>
+            <AvatarPic />
+            <LogoutButton/>
+          </When>
         </div>
       </Toolbar>
     </AppBar>

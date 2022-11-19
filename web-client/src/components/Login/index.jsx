@@ -13,7 +13,6 @@ const Login = () =>
         isAuthenticated && (
             <>
                 <div className="login">
-                    <h1>User Profile</h1>
                     <img
                         src={ user.picture } referrerPolicy="no-referrer"
                         alt={ user.picture }
