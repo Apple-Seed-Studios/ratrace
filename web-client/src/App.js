@@ -1,19 +1,29 @@
-import LandingPage from './components/LandingPage'
 import { Provider } from 'react-redux';
 import store from './store';
-import TaskForm from './components/TaskForm'
-import TaskDisplay from './components/TaskDisplay';
-import Timer from './components/Timer';
+import Header from './components/Header/index';
+import Footer from './components/Footer/index';
+import Main from './components/Main/index';
+import { useAuth0 } from "@auth0/auth0-react";
+import LoginButton from './components/Login/LoginButton';
 
-function App() {
-  return (<>
-  <Provider store={store}>
-  <TaskForm/>
-  <Timer/>
-  <TaskDisplay/>
-  <LandingPage/>
-  </Provider>
-  </>);
+
+const App = () =>
+{
+  const {  isAuthenticated } = useAuth0();
+
+  return (
+    <Provider store={ store }>
+      <Header />
+      {
+        isAuthenticated 
+        ? <>
+            <Main />
+          </>
+        : <LoginButton />
+      }
+      <Footer />
+    </Provider>
+  );
 }
 
 export default App;
