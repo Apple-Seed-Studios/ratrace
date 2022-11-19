@@ -12,6 +12,7 @@ import PauseIcon from '@mui/icons-material/Pause';
 const Timer = function () {
 
     let time = useSelector(state => state.time)
+    let audio = new Audio('../../alert.mp3')
 
     let [toggleEdit, setToggleEdit] = useState(false);
     let [intervalId, setIntervalId] = useState();
@@ -49,10 +50,12 @@ const Timer = function () {
             clearInterval(intervalId)
             dispatch(endWork())
             setWorkCycle(false);
+            audio.play();
         } else{
             clearInterval(intervalId)
             dispatch(endRest())
             setWorkCycle(true);
+            audio.play();
         }
         }
     }, [time, intervalId, dispatch, workCycle])
