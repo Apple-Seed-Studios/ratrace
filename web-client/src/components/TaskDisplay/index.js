@@ -3,21 +3,18 @@ import { useEffect } from 'react';
 import { getTasks } from '../../store/tasks';
 
 
-const TaskDisplay = function ()
-{
-
+const TaskDisplay = function () {
     let dispatch = useDispatch();
     let tasks = useSelector(state => state.tasks);
 
     console.log(tasks);
     useEffect( () =>{
-    const loadTasks = async () => {
-
-    
-    await dispatch(getTasks());
+        const loadTasks = async () => {
+        await dispatch(getTasks());
     };
     loadTasks();
-} ,[]);
+    //eslint-disable-next-line
+}, []);
 
 
     return (<>
