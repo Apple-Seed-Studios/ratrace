@@ -33,11 +33,16 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+if (process.env.SERVE_STATIC_PAGES) {
+  console.log('serving static pages from express server');
+  app.use("/", express.static("../web-client/build"));
+}
+
 
 //Routes
-app.get('/', (req,res) => {
-  res.send('hello');
-});
+// app.get('/', (req,res) => {
+//   res.send('hello');
+// });
 
 app.use('/api/v1', v1);
 app.get('/hello', handleHelloWorld)
