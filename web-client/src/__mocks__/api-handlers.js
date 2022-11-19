@@ -9,7 +9,17 @@ export const handlers = [
     return res(ctx.status(200), ctx.json(tasks));
   }),
 
-  rest.post(server + "/tasks", (req, res, ctx) => { 
-    return res(ctx.status(201), ctx.json(tasks[0]));
+  rest.post(server + "/tasks", async (req, res, ctx) => { 
+    const task = await req.json();
+    return res(ctx.status(201), ctx.json(task));
+  } ),
+
+  rest.put(server + "/tasks/:id", async (req, res, ctx) => { 
+    const { id } = req.params
+    const updates = await req.json();
+    const task = tasks.find(t => t._id === id);
+    const returnVal = { ...task, ...updates };
+
+    return res(ctx.status(200), ctx.json(returnVal));
   } )
 ];

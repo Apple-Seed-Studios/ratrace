@@ -10,4 +10,13 @@ const reducers = {
     time: timeReducer,
 }
 
-export default createStore(combineReducers(reducers), applyMiddleware(thunk))
+const appReducer = combineReducers(reducers)
+
+const rootReducer = (state, action) => {
+    if (action.type === 'RESET') {
+        return appReducer(undefined, action);
+    }
+    return appReducer(state, action);
+}
+
+export default createStore(rootReducer, applyMiddleware(thunk))

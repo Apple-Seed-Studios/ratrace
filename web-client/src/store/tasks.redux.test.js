@@ -1,17 +1,25 @@
-import { addTaskRaw, taskReducer } from "./tasks";
+import { addTaskPure, updateTaskPure, taskReducer } from "./tasks";
+import { tasks } from '../__fixtures__';
 
 describe('Task Reducers', () => {
   test('should add task', async () => {
-    const dispatch = jest.fn();
-    const mockAxios = {
-      post: (url, payload) => Promise.resolve({ data: payload })
-    };
     const initialState = taskReducer();
     const newTask = {content: "Get bread."}
+    const action = addTaskPure(newTask);
     const expectedState = [...initialState, newTask];
     let state = initialState;
-    let thunk = addTaskRaw(mockAxios)(newTask);
-    state = taskReducer(state, await thunk(dispatch));
-    expect(dispatch).toHaveBeenCalledWith({ type: 'ADD_TASK', payload: newTask});
+    state = taskReducer(state, action);
+    expect(state).toEqual(expectedState);
+  });
+
+  test('should update task', async () => {
+    const initialState = taskReducer();
+    let state = initialState;
+    state = taskReducer(state, addTaskPure(tasks[0]));
+    state = taskReducer(state, addTaskPure(tasks[1]));
+    const expectedState = [tasks[0], { ...tasks[1], task_name: 'updated task'}];
+    const action = updateTaskPure({_id: tasks[1]._id, task_name: 'updated task'})
+    state = taskReducer(state, action);
+    expect(state).toEqual(expectedState);
   });
 });
