@@ -50,7 +50,7 @@ const initialState = [];
     }
   }
 
-const addTask = (payload) => async (dispatch) => {
+export const addTaskRaw = (axios) => (payload) => async (dispatch) => {
     payload.completed = false;
     let response = await axios.post(`${API_SERVER}/api/v1/tasks`, payload);
     console.log(response.data);
@@ -64,7 +64,7 @@ const addTask = (payload) => async (dispatch) => {
 
 
 const taskReducer = (state=initialState, action) => {
-  // if(!action) return state;
+    if(!action) return state;
     switch(action.type){
         // case 'SET_TASK':
         //     return {
@@ -94,4 +94,6 @@ const taskReducer = (state=initialState, action) => {
   }
     }
 
+
+const addTask = addTaskRaw(axios);
 export { addTask, taskReducer };
