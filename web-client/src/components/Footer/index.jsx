@@ -12,7 +12,7 @@ function Footer(props)
         color="text.secondary"
         component="p"
       >
-        It's not a pyramid-scheme, I swear!™
+        Planting one seed at a time™
       </Typography>
       <Copyright />
     </Box>

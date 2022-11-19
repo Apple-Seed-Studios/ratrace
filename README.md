@@ -1,3 +1,8 @@
+
+Client Tests: ![Client tests passing badge](https://github.com/Apple-Seed-Studios/ratrace/actions/workflows/client.web.yml/badge.svg)
+
+Server Tests: ![Server tests passing badge](https://github.com/Apple-Seed-Studios/ratrace/actions/workflows/server.node.yml/badge.svg)
+
 # RatRace Todos
 
 A todo app that gets you to work!

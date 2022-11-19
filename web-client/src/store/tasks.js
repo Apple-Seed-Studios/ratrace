@@ -9,14 +9,13 @@ const addTask = (payload) => {
 
 }
 
+
 const taskReducer = (state=tasks, action) => {
+    if (!action) return state;
     switch(action.type){
         case 'ADD_TASK': return [...state, action.payload]
         default: return state;
     }
 }
 
-module.exports = {
-    addTask,
-    taskReducer,
-}
+export { addTask, taskReducer };
