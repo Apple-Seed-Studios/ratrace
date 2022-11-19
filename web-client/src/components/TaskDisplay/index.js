@@ -3,7 +3,8 @@ import { useEffect } from 'react';
 import { getTasks } from '../../store/tasks';
 
 
-const TaskDisplay = function (){
+const TaskDisplay = function ()
+{
 
     let dispatch = useDispatch();
     let tasks = useSelector(state => state.tasks);
