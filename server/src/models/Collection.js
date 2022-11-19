@@ -15,7 +15,7 @@ class Collection {
       return this.model.findOne({ id });
     }
     else {
-      return this.model.findAll({});
+      return this.model.find({});
     }
   }
 
@@ -37,7 +37,7 @@ class Collection {
 
 
 module.exports = {
-  Users: new Collection(Users),
-  Tasks: new Collection(Tasks),
-  Messages: new Collection(Messages),
-}
+  users: new Collection(Users),
+  tasks: new Collection(Tasks),
+  messages: new Collection(Messages),
+};

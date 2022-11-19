@@ -27,21 +27,19 @@ const TaskForm = function ()
     }
 
 
-    return (
-        <>
-            <Dialog open={ showForm } onClose={ toggleForm }>
-                <DialogTitle>Add task</DialogTitle>
-                <DialogContent>
-                    <form onSubmit={ handleSubmit }>
-                        <TextField label='Task Name' id='task_name'></TextField>
-                        <TextField label='Description' id='task_description'></TextField>
-                        <Button type='submit' onClick={ toggleForm } variant='outlined'>Submit</Button>
-                    </form>
-                </DialogContent>
-            </Dialog>
-            <Button variant='contained' onClick={ toggleForm }>+ Task</Button>
-        </>
-    )
+    return (<>
+    <Dialog open={showForm} onClose={toggleForm}>
+        <DialogTitle>Add task</DialogTitle>
+        <DialogContent>
+            <form onSubmit={handleSubmit}>
+            <TextField label='Task Name' id='task_name' required></TextField>
+            <TextField label='Description' id='task_description' required></TextField>
+            <Button type='submit' onClick={toggleForm} variant='outlined'>Submit</Button>
+            </form>
+        </DialogContent>
+    </Dialog>
+    <Button variant='contained' onClick={toggleForm}>+ Task</Button>
+    </>)
 }
 
 export default TaskForm;
