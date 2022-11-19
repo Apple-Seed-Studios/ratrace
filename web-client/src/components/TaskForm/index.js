@@ -5,13 +5,15 @@ import { useState } from 'react';
 import { addTask } from '../../store/tasks';
 
 
-const TaskForm = function () {
-    
+const TaskForm = function ()
+{
+
     let dispatch = useDispatch();
     let tasks = useSelector(state => state.tasks)
-    let [ showForm, setShowForm] = useState(false);
+    let [ showForm, setShowForm ] = useState(false);
 
-    let handleSubmit = (e) => {
+    let handleSubmit = (e) =>
+    {
         e.preventDefault();
         dispatch(addTask({
             task_name: e.target.task_name.value,
@@ -19,7 +21,8 @@ const TaskForm = function () {
         }))
         console.log(tasks)
     }
-    const toggleForm = () => {
+    const toggleForm = () =>
+    {
         setShowForm(!showForm);
     }
 
