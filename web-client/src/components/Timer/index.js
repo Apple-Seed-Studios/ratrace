@@ -1,10 +1,12 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { Fab, TextField } from '@mui/material';
+import { Fab, TextField, Button} from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit'
 import { useState, useEffect } from 'react';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import { decrementTime, setTime } from '../../store/timer';
+import { decrementTime, setTime, endWork, endRest } from '../../store/timer';
 import PauseIcon from '@mui/icons-material/Pause';
+
+
 
 
 const Timer = function () {
@@ -13,6 +15,7 @@ const Timer = function () {
 
     let [toggleEdit, setToggleEdit] = useState(false);
     let [intervalId, setIntervalId] = useState();
+    let [workCycle, setWorkCycle] = useState(true)
     let dispatch = useDispatch();
 
     let handleToggle = () => {
@@ -27,23 +30,42 @@ const Timer = function () {
     let countDown = () => {
         dispatch(decrementTime());
     }
-    useEffect(() => {
-        if(time <= 0){
-            clearInterval(intervalId)
-        }
-    }, [time, intervalId])
-
-
-
-    let convertTime = (milliseconds) => {
-        let totalSeconds = milliseconds /1000;
-        let totalMinutes = Math.floor(totalSeconds / 60)
-        let leftOverSeconds = Math.floor(totalSeconds % 60)
-        return totalMinutes + ':' + leftOverSeconds;
+ let handleTimerSubmit = (e) => {
+    e.preventDefault();
+    let splitWork = e.target.work_time.value.split(':');
+    let splitRest = e.target.rest_time.value.split(':');
+    let payload = {
+        work_minutes: parseInt(splitWork[0]),
+        work_seconds: parseInt(splitWork[1]),
+        rest_minutes: parseInt(splitRest[0]),
+        rest_seconds: parseInt(splitRest[1]),
     }
+    dispatch(setTime(payload));
+    setToggleEdit(false)
+ }
+    useEffect(() => {
+        if(time.seconds <= 0 && time.minutes <= 0){
+            if(workCycle){
+            clearInterval(intervalId)
+            dispatch(endWork())
+            setWorkCycle(false);
+        } else{
+            clearInterval(intervalId)
+            dispatch(endRest())
+            setWorkCycle(true);
+        }
+        }
+    }, [time, intervalId, dispatch, workCycle])
 
     return (<>
-    {toggleEdit ? <TextField  defaultValue={convertTime(time)}/>  : <h1>{convertTime(time)}</h1>}
+    {toggleEdit ? <>
+        <form onSubmit={handleTimerSubmit}>
+        <TextField id='work_time' defaultValue={time.defaultWorkMinutes + ":" + time.defaultWorkSeconds}/>
+        <TextField id='rest_time' defaultValue={time.minutes + ":" + time.seconds}/>
+        <Button type='submit'>submit</Button>
+        </form>
+     </>  
+    : <h1>{time.minutes + ':' + time.seconds}</h1>}
     <Fab onClick={handleToggle} size='small'><EditIcon/></Fab>
     <Fab size='small' onClick={startTimer}><PlayArrowIcon/></Fab>
     <Fab size='small' onClick={stopTimer}><PauseIcon/></Fab>
