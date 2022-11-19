@@ -1,19 +1,29 @@
-import Avatar from '@mui/joy/Avatar';
-import Box from '@mui/joy/Box';
+import * as React from 'react';
+import Avatar from '@mui/material/Avatar';
 import { useAuth0 } from "@auth0/auth0-react";
-import { When } from 'react-if';
+import { If, Then, Else } from 'react-if';
 
 export default function AvatarPic()
 {
   const { user, isAuthenticated } = useAuth0();
   return (
-    <When condition={ isAuthenticated }>
-      <Box sx={ { display: 'flex', gap: 2, alignItems: 'center' } }>
-        <Avatar
-          alt={ user.name }
-          src={ user.picture }
-          size="sm" />
-      </Box>
-    </When>
+    <>
+      <If condition={ isAuthenticated }>
+        <Then>
+          <Avatar
+            alt={ user.name }
+            src={ user.picture }
+            size="sm"
+          />
+        </Then>
+        <Else>
+          <Avatar
+            alt="User not logged in image"
+            src="/broken-image.jpg"
+          />
+        </Else>
+      </If>
+
+    </>
   );
 }
