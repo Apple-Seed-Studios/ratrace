@@ -9,10 +9,12 @@ const LoginButton = () =>
 
   return (
     <Button
-      variant="outlined"
+      variant="contained"
+      color="success"
+      size="large"
       onClick={ () => loginWithRedirect() }
     >
-      Login/create account ...something?
+      Get Started
     </Button>
   )
 };

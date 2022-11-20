@@ -11,8 +11,8 @@ const LogoutButton = () =>
   return (
     <IconButton
       sx={ { ml: 1 } }
-      color="inherit"
       variant="soft"
+      aria-label="logout button"
       onClick={ () => logout({ returnTo: window.location.origin }) }
     >
       <LogoutIcon />

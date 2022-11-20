@@ -11,8 +11,8 @@ const LoginNavIcon = () =>
   return (
     <IconButton
       sx={ { ml: 1 } }
-      color="inherit"
       variant="soft"
+      aria-label="login button"
       onClick={ () => loginWithRedirect() }
     >
       <LoginIcon/>

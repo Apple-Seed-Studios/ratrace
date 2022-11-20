@@ -1,5 +1,4 @@
 import { Button, Stack, Box, Typography, Container } from '@mui/material/';
-import './LandingPage.scss';
 import LoginButton from '../Login/LoginButton';
 
 function LandingPage()
@@ -13,7 +12,7 @@ function LandingPage()
             } }
             className='landingPage'
         >
-            <Container maxWidth="sm">
+            <Container maxWidth="md">
                 <Typography
                     component="h1"
                     variant="h2"
@@ -35,7 +34,7 @@ function LandingPage()
                     Just imagine the look on your kids' faces when they see your productivity-energy emanating into the room.
                     <br />
                     <br />
-                    Most people don't have the courage to work 60 hours a day like you and me.
+                    Most people don't have the courage to work 60 hours a day... folks like us? We're just built different. 🐀
                     <br />
                     <br />
                     (Should we display this to users who aren't logged in?)
@@ -47,7 +46,6 @@ function LandingPage()
                     justifyContent="center"
                 >
                     <LoginButton />
-                    <Button disabled={ true } variant="outlined">Dismiss? Create your first Task/timer? Meow?</Button>
                 </Stack>
             </Container>
         </Box>
