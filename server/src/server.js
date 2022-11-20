@@ -6,8 +6,12 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const v1 = require('./routes/v1')
-// const verifyUser = require('./auth');
+const v1 = require('./routes/v1');
+const v2 = require('./routes/v2');
+const verifyUser = require('./middleware/auth');
+const notFoundHandler = require('./error-handlers/404.js');
+const errorHandler = require('./error-handlers/500.js');
+const logger = require('./middleware/logger.js');
 
 
 
@@ -40,18 +44,23 @@ if (process.env.SERVE_STATIC_PAGES) {
 
 
 //Routes
-// app.get('/', (req,res) => {
-//   res.send('hello');
-// });
+app.use(logger);
+app.get('/', (req, res) => {
+  res.send('hello');
+});
 
 app.use('/api/v1', v1);
-app.get('/hello', handleHelloWorld)
-app.get('/messages', getMessage)
-app.post('/messages', postMessage)
+app.use('/api/v2', verifyUser, v2);
+app.get('/hello', handleHelloWorld);
+app.get('/messages', getMessage);
+app.post('/messages', postMessage);
+
+app.use('*', notFoundHandler);
+app.use(errorHandler);
 
 module.exports = {
   app,
   start: (port) => {
     app.listen(port, () => console.log('App is running on port :: ' + port));
-  }
-}
+  },
+};

@@ -5,6 +5,7 @@ import Copyright from ".";
 describe('Test Copyright Component', () => {
   test('Copyright Component renders', () => {
     render(<Copyright />);
-    expect(screen.getByText('Apple Seed Studios')).toBeInTheDocument();
+    const expectedContent = "Apple Seed Studios 🐀"
+    expect(screen.getByText(expectedContent)).toBeInTheDocument();
   });
 });

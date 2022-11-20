@@ -1,10 +1,9 @@
-const Messages = require('../models/Messages/Messages.js')
+const Messages = require('../models/Messages/Messages.js');
 
 
 async function handleHelloWorld(req, res) {
   res.status(200).json({message: 'hello'});
 }
-
 
 
 async function postMessage(request, response, next) {

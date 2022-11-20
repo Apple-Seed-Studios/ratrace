@@ -2,22 +2,22 @@ import React from "react";
 // importing `useAuth0`, because this is a functional component
 import { useAuth0 } from "@auth0/auth0-react";
 import { IconButton } from '@mui/material';
-import LogoutIcon from '@mui/icons-material/Logout';
+import LoginIcon from '@mui/icons-material/Login';
 
-const LogoutButton = () =>
+const LoginNavIcon = () =>
 {
-  const { logout } = useAuth0();
+  const { loginWithRedirect } = useAuth0();
 
   return (
     <IconButton
       sx={ { ml: 1 } }
       variant="soft"
-      aria-label="logout button"
-      onClick={ () => logout({ returnTo: window.location.origin }) }
+      aria-label="login button"
+      onClick={ () => loginWithRedirect() }
     >
-      <LogoutIcon />
+      <LoginIcon/>
     </IconButton>
-  );
+  )
 };
 
-export default LogoutButton;
+export default LoginNavIcon;

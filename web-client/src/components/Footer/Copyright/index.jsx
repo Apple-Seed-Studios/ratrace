@@ -9,14 +9,14 @@ function Copyright()
       color="text.secondary"
       align="center"
     >
-      { ' 🐀 Copyright © ' }
+      { '  Copyright © ' }
       <Link
         color="inherit"
         rel="noopener noreferrer"
         target="_blank"
         href="https://github.com/Apple-Seed-Studios"
       >
-        Apple Seed Studios
+        Apple Seed Studios 🐀
       </Link>{ ' ' }
       { new Date().getFullYear() }
       { '.' }

@@ -3,12 +3,11 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.scss'
 
-// custom MUI theme context
-import Theme from '../src/context/themeContext';
+import Theme from '../src/context/themeContext'; // custom MUI theme context
 
 import CssBaseline from '@mui/material/CssBaseline'; // normalizes/resets most css defaults, except some useful ones
 
-// import auth0 dependencies
+// Auth0 Context/Provider
 import { Auth0Provider } from "@auth0/auth0-react";
 
 

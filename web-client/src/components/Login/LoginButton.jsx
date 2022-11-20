@@ -1,22 +1,21 @@
 import React from "react";
 // importing `useAuth0`, because this is a functional component
 import { useAuth0 } from "@auth0/auth0-react";
-import { IconButton } from '@mui/material';
-import LoginIcon from '@mui/icons-material/Login';
+import { Button } from '@mui/material';
 
 const LoginButton = () =>
 {
   const { loginWithRedirect } = useAuth0();
 
   return (
-    <IconButton
-      sx={ { ml: 1 } }
-      color="inherit"
-      variant="soft"
+    <Button
+      variant="contained"
+      color="success"
+      size="large"
       onClick={ () => loginWithRedirect() }
     >
-      <LoginIcon/>
-    </IconButton>
+      Get Started
+    </Button>
   )
 };
 
