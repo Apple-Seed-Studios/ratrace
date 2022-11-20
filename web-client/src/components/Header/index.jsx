@@ -2,9 +2,10 @@ import { AppBar, Toolbar, Typography, Box, Stack } from '@mui/material';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import { Divider } from '@mui/material/'
 import { useAuth0 } from "@auth0/auth0-react";
-import { When } from 'react-if';
+import { If, Then, Else } from 'react-if';
 import AvatarPic from './Avatar';
 import LogoutButton from '../Login/LogoutButton';
+import LoginNavIcon from '../Login/LoginNavIcon';
 import ThemeButton from './ThemeButton';
 import './header.scss';
 
@@ -44,10 +45,15 @@ function Header(props)
               justifyContent="center"
             >
               <ThemeButton />
-              <When condition={ isAuthenticated }>
-                <AvatarPic />
-                <LogoutButton />
-              </When>
+              <If condition={ isAuthenticated }>
+                <Then>
+                  <AvatarPic />
+                  <LogoutButton />
+                </Then>
+                <Else>
+                  <LoginNavIcon />
+                </Else>
+              </If>
             </Stack>
           </Box>
         </Toolbar>
