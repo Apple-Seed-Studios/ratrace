@@ -17,7 +17,7 @@ function IsAuthorized(props)
 
 
     // this is a template for creating a request with the token
-    // since different CRUD requires a different config, I think this is a good candidate for a reducer/redux!
+    // since different CRUD requires a different config, I think this is a good candidate for a reducer/redux! (somebody teach me 👉👈)
     const requestTemplate = (jwt) =>
     {
         const config = {
@@ -34,8 +34,8 @@ function IsAuthorized(props)
         return config;
     };
 
-    // after building the config, we can call axios like this:
-    let templateResponse = async (config) => await axios(config);
+    // after building the config, we can make API calls by passing in the config like this:
+    //let templateResponse = async (config) => await axios(config);
 
     return (
         <When condition={ isAuthenticated }>
