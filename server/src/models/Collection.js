@@ -2,7 +2,7 @@
 
 const Messages= require('./Messages/Messages');
 const Tasks= require('./Tasks/Tasks');
-const Users= require('./Users/Users')
+const Users= require('./Users/Users');
 
 class Collection {
 
