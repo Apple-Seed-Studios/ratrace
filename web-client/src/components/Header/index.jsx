@@ -35,7 +35,7 @@ function Header(props)
             color="inherit"
             noWrap
           >
-            🐀 Rat-race 🐀
+            🐀 Rat-race
           </Typography>
           <Box className='navRightButtons'>
             <Stack

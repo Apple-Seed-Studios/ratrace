@@ -1,5 +1,6 @@
 import { Button, Stack, Box, Typography, Container } from '@mui/material/';
 import './LandingPage.scss';
+import LoginButton from '../Login/LoginButton';
 
 function LandingPage()
 {
@@ -45,7 +46,7 @@ function LandingPage()
                     spacing={ 2 }
                     justifyContent="center"
                 >
-                    <Button disabled={ true } variant="contained">Login/create account ...something?</Button>
+                    <LoginButton />
                     <Button disabled={ true } variant="outlined">Dismiss? Create your first Task/timer? Meow?</Button>
                 </Stack>
             </Container>
