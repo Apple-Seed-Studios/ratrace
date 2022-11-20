@@ -11,8 +11,9 @@ class Collection {
   }
 
   get(id) {
+    console.log(id);
     if (id) {
-      return this.model.findOne({ id });
+      return this.model.findOne({ _id: id });
     }
     else {
       return this.model.find({});
@@ -29,7 +30,7 @@ class Collection {
   }
 
   delete(id) {
-    return this.model.destroy({ where: { id }});
+    return this.model.deleteOne({ id });
   }
 
 }
