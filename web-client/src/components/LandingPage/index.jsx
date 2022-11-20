@@ -1,4 +1,4 @@
-import { Button, Stack, Box, Typography, Container } from '@mui/material/';
+import { Stack, Box, Typography, Container } from '@mui/material/';
 import LoginButton from '../Login/LoginButton';
 
 function LandingPage()
@@ -8,7 +8,7 @@ function LandingPage()
             sx={ {
                 bgcolor: 'background.paper',
                 pt: 8,
-                pb: 6,
+                pb: 10,
             } }
             className='landingPage'
         >
