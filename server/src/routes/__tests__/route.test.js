@@ -1,7 +1,7 @@
 const routes = require('../route');
 
 const json = jest.fn();
-const status = jest.fn(() => { return {json} });
+const status = jest.fn(() => { return {json}; });
 
 describe('Hello World Route', () => {
   test('should return hello', () => {

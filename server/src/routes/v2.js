@@ -28,7 +28,7 @@ async function handleGetAll(req, res) {
 
 async function handleGetOne(req, res) {
   const id = req.params.email;
-  let theRecord = await req.model.get(id)
+  let theRecord = await req.model.get(id);
   res.status(200).json(theRecord);
 }
 
@@ -41,7 +41,7 @@ async function handleCreate(req, res) {
 async function handleUpdate(req, res) {
   const id = req.params.email;
   const obj = req.body;
-  let updatedRecord = await req.model.update(id, obj)
+  let updatedRecord = await req.model.update(id, obj);
   res.status(200).json(updatedRecord);
 }
 
