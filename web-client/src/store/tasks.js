@@ -51,14 +51,26 @@ export const updateTask = (payload) => async (dispatch) => {
   dispatch(updateTaskPure(data));
 }
 
+export const deleteTaskPure = (payload) => {
+  return {
+    type: 'DELETE_TASK',
+    payload: {_id: payload._id},
+  };
+}
+
 export const deleteTask = (payload) => async (dispatch) => {
-  let response = await axios.delete(`${API_SERVER}/api/v1/tasks`, payload);
+  const _id = payload._id;
+  let response = await axios.delete(`${API_SERVER}/api/v1/tasks/${_id}`);
   console.log(response.data);
   const data = response.data;
-  dispatch({
-    type: 'DELETE_TASK',
-    payload: data,
-  })
+  if (data.acknowledged) {
+    dispatch({
+      type: 'DELETE_TASK',
+      payload: {_id}
+    });
+  } else {
+    console.error(`${_id} not deleted on server.`)
+  }
 
 }
 
@@ -75,6 +87,11 @@ const updateTaskReducer = (state, action) => {
   return tasks;
 }
 
+const deleteTaskReducer = (state, action) => {
+  const tasks = state;
+  return tasks.filter(t => t._id !== action.payload._id);
+}
+
 const taskReducer = (state = initialState, action) => {
   if(!action) return state;
   switch (action.type) {
@@ -82,12 +99,18 @@ const taskReducer = (state = initialState, action) => {
     case 'GET_TASKS':
       return action.payload;
 
-    case 'ADD_TASK': return [...state, action.payload]
+    case 'ADD_TASK':
+      return [...state, action.payload]
 
-    case 'UPDATE_TASK': return updateTaskReducer(state, action);
+    case 'UPDATE_TASK':
+      return updateTaskReducer(state, action);
 
-    case 'DELETE_TASK': return [...state, action.payload]
-    default: return state;
+    case 'DELETE_TASK':
+      return deleteTaskReducer(state, action);
+
+    default:
+      return state;
+
   }
 }
 
