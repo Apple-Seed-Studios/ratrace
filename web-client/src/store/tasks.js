@@ -15,12 +15,14 @@ export const getTasks = () => async (dispatch) => {
   // dispatch(setTask(data.results));
 }
 
+/*
 export const setTask = (tasks) => {
   return {
     type: 'SET_TASK',
     payload: tasks,
   }
 }
+*/
 
 export const addTaskPure = (payload) => {
   return {
