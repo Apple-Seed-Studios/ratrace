@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, Typography, Box } from '@mui/material';
+import { AppBar, Toolbar, Typography, Box, Stack } from '@mui/material';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import { Divider } from '@mui/material/'
 import { useAuth0 } from "@auth0/auth0-react";
@@ -35,15 +35,21 @@ function Header(props)
             color="inherit"
             noWrap
           >
-            Rat-race 🐀
+            🐀 Rat-race 🐀
           </Typography>
-          <div className='navLeftButtons'>
-            <ThemeButton />
-            <When condition={ isAuthenticated }>
-              <AvatarPic />
-              <LogoutButton />
-            </When>
-          </div>
+          <Box className='navRightButtons'>
+            <Stack
+              direction="row"
+              spacing={ 1 }
+              justifyContent="center"
+            >
+              <ThemeButton />
+              <When condition={ isAuthenticated }>
+                <AvatarPic />
+                <LogoutButton />
+              </When>
+            </Stack>
+          </Box>
         </Toolbar>
       </AppBar>
     </Box>

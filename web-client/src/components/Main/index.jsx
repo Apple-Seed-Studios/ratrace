@@ -1,4 +1,3 @@
-import LandingPage from '../LandingPage';
 import Timer from '../Timer';
 import TaskForm from '../TaskForm';
 import TaskDisplay from '../TaskDisplay';
@@ -14,7 +13,6 @@ function Main(props)
       <TaskForm />
       <Timer/>
       <TaskDisplay />
-      <LandingPage />
     </main>
   )
 }

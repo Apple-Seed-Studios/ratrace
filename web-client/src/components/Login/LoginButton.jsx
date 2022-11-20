@@ -15,6 +15,7 @@ const LoginButton = () =>
       variant="soft"
       onClick={ () => loginWithRedirect() }
     >
+      <p>Login</p>
       <LoginIcon/>
     </IconButton>
   )
