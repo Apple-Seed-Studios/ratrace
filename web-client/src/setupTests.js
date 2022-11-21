@@ -1,5 +1,8 @@
 // src/setupTests.js
 import { server } from './__mocks__/server.js'
+import { setupAuth } from './lib/Collection';
+
+setupAuth('myToken');
 // Establish API mocking before all tests.
 beforeAll(() => server.listen())
 
