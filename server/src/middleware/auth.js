@@ -20,8 +20,10 @@ const client = jwksClient({
 // function is from the jsonwebtoken docs
 // https://www.npmjs.com/package/jsonwebtoken
 // (search for auth0)
-function getKey(header, callback){
-  client.getSigningKey(header.kid, function(err, key) {
+function getKey(header, callback)
+{
+  client.getSigningKey(header.kid, function (err, key)
+  {
     let signingKey = key.publicKey || key.rsaPublicKey;
     callback(null, signingKey);
   });
@@ -30,19 +32,52 @@ function getKey(header, callback){
 // function to verify's token
 // this is just how we do it
 // errorFirstOrUserCallback is a callback function to just deny a request if the requester isn't who they say they are without even trying to run the function
-function verifyUser (req, errorFirstOrUserCallback) {
-  try {
-    const token = req.headers.authorization.split(' ')[1];
+/*
+function verifyUser(req, errorFirstOrUserCallback)
+{
+  try
+  {
+    const token = req.headers.authorization.split(' ')[ 1 ];
     // get the auth0/jwt token from the client's request
     // the `.verify()` method is from the jwt package we imported/required
     // `getKey` is the function above this one, from the jwt docs
     // go to https://www.npmjs.com/package/jsonwebtoken
     // use `ctrl+f` and search for: `Verify using getKey callback` to get an example
     jwt.verify(token, getKey, {}, errorFirstOrUserCallback);
-  } catch (error) {
+  }
+  catch (error)
+  {
     errorFirstOrUserCallback("You're not the rat we were expecting");
   }
 }
+*/
+const verifyUser = (req, res, next) =>
+{
+  try
+  {
+    if (req.headers.authorization)
+    {
+      const token = req.headers.authorization.split(' ')[ 1 ];
 
-// export our 'verifyUser' function to use when a client attempts to connect to a socket
+      jwt.verify(token, getKey, (err,user) =>
+      {
+        if (err)
+        {
+          return res.status(403);
+        }
+        // req.user = user; // if we want to do anything with the user or their roles, here it is
+        next();
+      });
+    }
+    else
+    {
+      res.status(401);
+    }
+  }
+  catch (err)
+  {
+    next('invalid login');
+  }
+};
+
 module.exports = verifyUser;
