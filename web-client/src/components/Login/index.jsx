@@ -25,7 +25,6 @@ const Login = () =>
             </>
         </When>
     )
-    )
 }
 
 export default Login;
