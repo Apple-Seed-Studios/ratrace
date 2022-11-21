@@ -23,8 +23,7 @@ const { handleHelloWorld, getMessage, postMessage } = require('./routes/route');
 // add validation to confirm we are wired up to our mongo DB
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function ()
-{
+db.once('open', function () {
   console.log('Mongoose is listening');
 });
 
@@ -38,11 +37,15 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+if (process.env.SERVE_STATIC_PAGES) {
+  console.log('serving static pages from express server');
+  app.use("/", express.static("../web-client/build"));
+}
+
 
 //Routes
 app.use(logger);
-app.get('/', (req, res) =>
-{
+app.get('/', (req, res) => {
   res.send('hello');
 });
 
@@ -57,8 +60,7 @@ app.use(errorHandler);
 
 module.exports = {
   app,
-  start: (port) =>
-  {
+  start: (port) => {
     app.listen(port, () => console.log('App is running on port :: ' + port));
   },
 };

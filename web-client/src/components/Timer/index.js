@@ -60,6 +60,7 @@ const Timer = function () {
             audio.play();
         }
         }
+        //eslint-disable-next-line
     }, [time, intervalId, dispatch, workCycle])
 
     return (<>

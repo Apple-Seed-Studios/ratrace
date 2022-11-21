@@ -1,10 +1,10 @@
 import React from "react";
-import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth } from "../../hooks/useAuth";
 import { When } from 'react-if';
 
 const Login = () =>
 {
-    const { user, isAuthenticated, isLoading } = useAuth0();
+    const { user, isAuthenticated, isLoading } = useAuth();
 
     if (isLoading)
     {
@@ -24,7 +24,6 @@ const Login = () =>
                 </div>
             </>
         </When>
-    )
     )
 }
 

@@ -1,15 +1,16 @@
 import { When } from 'react-if';
-import { useAuth0 } from "@auth0/auth0-react";
+// import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth } from "../../hooks/useAuth";
 
 function IsAuthorized(props)
 {
-    const { isAuthenticated, user } = useAuth0();
+    const { isAuthenticated, user } = useAuth();
 
     const getAuthClaims = async () =>
     {
         if (!isAuthenticated) return ('not authenticated');
 
-        return useAuth0.getIdTokenClaims().then(claims => claims.__raw).catch(err =>
+        return useAuth.getIdTokenClaims().then(claims => claims.__raw).catch(err =>
         {
             console.log("Something went wrong getting the auth claims", err);
         })

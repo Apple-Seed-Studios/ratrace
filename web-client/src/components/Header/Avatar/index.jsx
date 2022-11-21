@@ -1,11 +1,11 @@
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
-import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth } from "../../../hooks/useAuth";
 import { If, Then, Else } from 'react-if';
 
 export default function AvatarPic()
 {
-  const { user, isAuthenticated } = useAuth0();
+  const { user, isAuthenticated } = useAuth();
   return (
     <>
       <If condition={ isAuthenticated }>
