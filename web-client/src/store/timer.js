@@ -1,12 +1,9 @@
 
 
 let time = {
-    minutes: 0,
-    seconds: 3,
-    defaultWorkMinutes: 1,
-    defaultWorkSeconds: 3,
-    defaultRestMinutes: 1,
-    defaultRestSeconds: 0,
+    time: 5000,
+    defaultWork: 5000,
+    defaultRest: 5000,
 }
 
 let setTime = (payload) => {
@@ -39,45 +36,24 @@ let endRest = (payload) => {
 let timeReducer = (state=time, action) => {
     switch(action.type){
         case "SET_TIME": return {
-            minutes: action.payload.work_minutes,
-            seconds: action.payload.work_seconds,
-            defaultWorkMinutes: action.payload.work_minutes,
-            defaultWorkSeconds: action.payload.work_seconds,
-            defaultRestMinutes: action.payload.rest_minutes,
-            defaultRestSeconds: action.payload.rest_seconds,
-        };
-        case "DECREMENT_TIME": let newState = {
-            minutes: state.minutes,
-            seconds: state.seconds - 1,
-            defaultWorkMinutes: state.defaultWorkMinutes,
-            defaultWorkSeconds: state.defaultWorkSeconds,
-            defaultRestMinutes: state.defaultRestMinutes,
-            defaultRestSeconds: state.defaultRestSeconds,
+            time: state.time,
+            defaultWork: action.payload.defaultWork,
+            defaultRest: action.payload.defaultRest,
         }
-        if(newState.seconds < 0){
-            newState = {
-                minutes: state.minutes -1,
-                seconds: 59,
-                defaultWorkMinutes: state.defaultWorkMinutes,
-                defaultWorkSeconds: state.defaultWorkSeconds,
-            }
+        case "DECREMENT_TIME": return {
+            time: state.time - 1000,
+            defaultWork: state.defaultWork,
+            defaultRest: state.defaultRest,
         }
-        return newState;
         case 'END_WORK': return {
-            minutes: state.defaultRestMinutes,
-            seconds: state.defaultRestSeconds,
-            defaultWorkMinutes: state.defaultWorkMinutes,
-            defaultWorkSeconds: state.defaultWorkSeconds,
-            defaultRestMinutes: state.defaultRestMinutes,
-            defaultRestSeconds: state.defaultRestSeconds,
+            time: state.defaultRest,
+            defaultWork: state.defaultWork,
+            defaultRest: state.defaultRest,
         };
         case 'END_REST': return {
-            minutes: state.defaultWorkMinutes,
-            seconds: state.defaultWorkSeconds,
-            defaultWorkMinutes: state.defaultWorkMinutes,
-            defaultWorkSeconds: state.defaultWorkSeconds,
-            defaultRestMinutes: state.defaultRestMinutes,
-            defaultRestSeconds: state.defaultRestSeconds,
+            time: state.defaultWork,
+            defaultWork: state.defaultWork,
+            defaultRest: state.defaultRest,
         };
         default: return state;
     }
