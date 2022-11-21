@@ -5,12 +5,12 @@ import LandingPage from '../LandingPage';
 import { If, Then, Else } from 'react-if';
 import './main.scss';
 
-import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth } from "../../hooks/useAuth";
 
 
 function Main(props)
 {
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated } = useAuth();
   return (
     <main className="main">
       <If condition={ isAuthenticated }>

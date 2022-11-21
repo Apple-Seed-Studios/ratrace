@@ -1,7 +1,7 @@
 import { AppBar, Toolbar, Typography, Box, Stack } from '@mui/material';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import { Divider } from '@mui/material/'
-import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth } from "../../hooks/useAuth";
 import { If, Then, Else } from 'react-if';
 import AvatarPic from './Avatar';
 import LogoutButton from '../Login/LogoutButton';
@@ -11,7 +11,7 @@ import './header.scss';
 
 function Header(props)
 {
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated } = useAuth();
   return (
     <Box sx={ {
       display: 'flex',
