@@ -37,9 +37,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-if (process.env.SERVE_STATIC_PAGES) {
+if (process.env.STATIC_PAGES_DIR) {
   console.log('serving static pages from express server');
-  app.use("/", express.static("../web-client/build"));
+  app.use("/", express.static(process.env.STATIC_PAGES_DIR));
 }
 
 
