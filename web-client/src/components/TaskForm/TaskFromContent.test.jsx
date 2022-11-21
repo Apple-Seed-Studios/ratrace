@@ -5,6 +5,16 @@ import '@testing-library/jest-dom';
 import TaskFormContent from './TaskFormContent';
 
 describe('Test TaskFormContent Component', () => {
+  test('TaskFormContent Component to render', async () => {
+    const handleSubmit = jest.fn((e) => { e.preventDefault(); });
+    const toggleForm = jest.fn();
+    render(<TaskFormContent {...{handleSubmit, toggleForm}} />);
+
+    expect(screen.getByLabelText(/Task Name/)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Description/)).toBeInTheDocument();
+    expect(screen.getByText(/Submit/)).toBeInTheDocument();
+  });
+
   test('TaskFormContent Component Button calls handleSubmit', async () => {
     const handleSubmit = jest.fn((e) => e.preventDefault());
     const toggleForm = jest.fn();
@@ -13,6 +23,8 @@ describe('Test TaskFormContent Component', () => {
     render(<TaskFormContent {...{handleSubmit, toggleForm}} />);
     // const taskNameInput = screen.getByLabelText(/Task Name/);
     // const taskDescInput = screen.getByLabelText(/Description/);
+    expect(screen.getByLabelText(/Task Name/)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Description/)).toBeInTheDocument();
     const taskSubmitButton = screen.getByText(/Submit/);
     /*
     await user.click(taskNameInput);
