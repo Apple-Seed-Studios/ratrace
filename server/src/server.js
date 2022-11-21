@@ -17,7 +17,7 @@ const logger = require('./middleware/logger.js');
 
 
 
-const { handleHelloWorld, getMessage, postMessage } = require('./routes/route');
+// const { handleHelloWorld, getMessage, postMessage } = require('./routes/route');
 
 
 // add validation to confirm we are wired up to our mongo DB
@@ -45,15 +45,12 @@ if (process.env.SERVE_STATIC_PAGES) {
 
 //Routes
 app.use(logger);
-app.get('/', (req, res) => {
-  res.send('hello');
-});
 
 app.use('/api/v1', v1);
 app.use('/api/v2', verifyUser, v2);
-app.get('/hello', handleHelloWorld);
-app.get('/messages', getMessage);
-app.post('/messages', postMessage);
+// app.get('/hello', handleHelloWorld);
+// app.get('/messages', getMessage);
+// app.post('/messages', postMessage);
 
 app.use('*', notFoundHandler);
 app.use(errorHandler);
