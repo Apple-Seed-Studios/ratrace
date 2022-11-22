@@ -70,6 +70,7 @@ const Timer = function () {
         }
         }
         setReadableTime(convertTimeReadable(time.time))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [time, intervalId, dispatch, workCycle])
 
     return (<>
