@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { addTotalTime } from '../../store/user'
 import { decrementTime, setTime, endWork, endRest } from '../../store/timer';
 import { convertTimeMilliseconds, convertTimeReadable } from '../../hooks/convertTime';
+import { updateTask } from '../../store/tasks'
 import PauseIcon from '@mui/icons-material/Pause';
 import NextPlanIcon from '@mui/icons-material/NextPlan';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
@@ -16,6 +17,7 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 const Timer = function () {
 
     let time = useSelector(state => state.time)
+    let activeTask = useSelector(state => state.activeTask)
     let audio = new Audio('../../alert.mp3')
     
     let [readableTime, setReadableTime] = useState({
@@ -39,6 +41,9 @@ const Timer = function () {
     }
     let stopTimer = () => {
         toggleTimerOn(false)
+        if(activeTask){
+            dispatch(updateTask(activeTask))
+        }
         clearInterval(intervalId)
     } 
     let countDown = () => {
@@ -77,6 +82,15 @@ const Timer = function () {
         setReadableTime(convertTimeReadable(time.time))
           //eslint-disable-next-line
     }, [time])
+
+    useEffect(() => {
+        if(activeTask){
+            if(!timerOn){
+            startTimer();
+            }
+        }
+        //eslint-disable-next-line
+    }, [activeTask])
 
     let skip = () => {
             if(workCycle){
