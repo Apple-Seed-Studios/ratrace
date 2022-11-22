@@ -35,10 +35,11 @@ let endRest = (payload) => {
 
 let timeReducer = (state=time, action) => {
     switch(action.type){
-        case "SET_TIME": return {
-            time: state.time,
-            defaultWork: action.payload.defaultWork,
-            defaultRest: action.payload.defaultRest,
+        case "SET_TIME": console.log(action.payload)
+        return {
+            time: action.payload.workCycle ? action.payload.workTime: action.payload.restTime,
+            defaultWork: action.payload.workTime,
+            defaultRest: action.payload.restTime,
         }
         case "DECREMENT_TIME": return {
             time: state.time - 1000,

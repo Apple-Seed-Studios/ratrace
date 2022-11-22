@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { getTasks } from '../../store/tasks';
-import { Card, CardContent, Typography, IconButton, Dialog, TextField, Button } from '@mui/material'
+import { getTasks, deleteTask } from '../../store/tasks';
+import { Card, CardContent, Typography, IconButton, Dialog, TextField, Button, Fab } from '@mui/material'
 import CheckIcon from '@mui/icons-material/Check';
 import ClearIcon from '@mui/icons-material/Clear';
 import TagIcon from '@mui/icons-material/Tag';
-import { deleteTask, updateTask } from '../../store/tasks';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+
 
 
 const TaskDisplay = function () {
@@ -35,6 +36,10 @@ let handleModal = (task) => {
     )
 }
 
+let trackTask = (task) => {
+
+}
+
     return (<>
         {tasks.map((task, idx) => {
             return (<Card id={idx} onClick={() => {setCurrentEdit(task); setModalOn(true)}}>
@@ -42,6 +47,7 @@ let handleModal = (task) => {
                     <Typography variant='h5'>{task.task_name}</Typography>
                     <Typography variant='body1'>{task.task_description}</Typography>
                 </CardContent>
+                <Fab size='small' onClick={() => trackTask(task)}><PlayArrowIcon/></Fab>
                 <IconButton><CheckIcon/></IconButton>
                 <IconButton onClick={() => dispatch(deleteTask(task))}><ClearIcon/></IconButton>
                 <IconButton><TagIcon/></IconButton>
