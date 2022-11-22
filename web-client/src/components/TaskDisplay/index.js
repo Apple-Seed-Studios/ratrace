@@ -9,51 +9,57 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
 
 
-const TaskDisplay = function () {
+const TaskDisplay = function ()
+{
     let dispatch = useDispatch();
     let tasks = useSelector(state => state.tasks);
-    let [modalOn, setModalOn] = useState(false)
-    let [currentEdit, setCurrentEdit] = useState([]);
+    let [ modalOn, setModalOn ] = useState(false)
+    let [ currentEdit, setCurrentEdit ] = useState([]);
 
     console.log(tasks);
-    useEffect( () =>{
-        const loadTasks = async () => {
-        await dispatch(getTasks());
-    };
-    loadTasks();
-    //eslint-disable-next-line
-}, []);
+    useEffect(() =>
+    {
+        const loadTasks = async () =>
+        {
+            await dispatch(getTasks());
+        };
+        loadTasks();
+        //eslint-disable-next-line
+    }, []);
 
-let handleModal = (task) => {
-    return (
-        <Dialog open={modalOn} onClose={() => setModalOn(false)}>
-            <form>
-                <TextField defaultValue={task.task_name}></TextField>
-                <TextField defaultValue={task.task_description}></TextField>
-                <Button type='submit'>Update</Button>
-            </form>
-        </Dialog>
-    )
-}
+    let handleModal = (task) =>
+    {
+        return (
+            <Dialog open={ modalOn } onClose={ () => setModalOn(false) }>
+                <form>
+                    <TextField defaultValue={ task.task_name }></TextField>
+                    <TextField defaultValue={ task.task_description }></TextField>
+                    <Button type='submit'>Update</Button>
+                </form>
+            </Dialog>
+        )
+    }
 
-let trackTask = (task) => {
+    let trackTask = (task) =>
+    {
 
-}
+    }
 
     return (<>
-        {tasks.map((task, idx) => {
-            return (<Card id={idx} onClick={() => {setCurrentEdit(task); setModalOn(true)}}>
+        { tasks.map((task, idx) =>
+        {
+            return (<Card id={ task._id } onClick={ () => { setCurrentEdit(task); setModalOn(true) } }>
                 <CardContent>
-                    <Typography variant='h5'>{task.task_name}</Typography>
-                    <Typography variant='body1'>{task.task_description}</Typography>
+                    <Typography variant='h5'>{ task.task_name }</Typography>
+                    <Typography variant='body1'>{ task.task_description }</Typography>
                 </CardContent>
-                <Fab size='small' onClick={() => trackTask(task)}><PlayArrowIcon/></Fab>
-                <IconButton><CheckIcon/></IconButton>
-                <IconButton onClick={() => dispatch(deleteTask(task))}><ClearIcon/></IconButton>
-                <IconButton><TagIcon/></IconButton>
+                <Fab size='small' onClick={ () => trackTask(task) }><PlayArrowIcon /></Fab>
+                <IconButton><CheckIcon /></IconButton>
+                <IconButton onClick={ () => dispatch(deleteTask(task)) }><ClearIcon /></IconButton>
+                <IconButton><TagIcon /></IconButton>
             </Card>)
-        })}
-        {modalOn ? handleModal(currentEdit): []}
+        }) }
+        { modalOn ? handleModal(currentEdit) : [] }
     </>)
 
 }
