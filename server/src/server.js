@@ -38,7 +38,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 if (process.env.STATIC_PAGES_DIR) {
-  console.log('serving static pages from express server');
+  console.log('serving static pages from express server at', process.env.STATIC_PAGES_DIR);
   app.use("/", express.static(process.env.STATIC_PAGES_DIR));
 }
 

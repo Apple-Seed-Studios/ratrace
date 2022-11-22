@@ -59,6 +59,7 @@ class Tasks {
 
 function setupAuth(token) {
   axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  console.log("set token to", token);
 }
 
 export { Tasks, setupAuth };
