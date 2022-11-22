@@ -1,6 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { getTasks, deleteTask } from '../../store/tasks';
+import { convertTimeReadable } from '../../hooks/convertTime';
+import { getTasks, deleteTask, updateTask } from '../../store/tasks';
+import { setActiveTask } from '../../store/activeTask';
 import { Card, CardContent, Typography, IconButton, Dialog, TextField, Button, Fab } from '@mui/material'
 import CheckIcon from '@mui/icons-material/Check';
 import ClearIcon from '@mui/icons-material/Clear';
@@ -12,10 +14,10 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 const TaskDisplay = function () {
     let dispatch = useDispatch();
     let tasks = useSelector(state => state.tasks);
+    let activeTask = useSelector(state => state.activeTask)
     let [modalOn, setModalOn] = useState(false)
     let [currentEdit, setCurrentEdit] = useState([]);
 
-    console.log(tasks);
     useEffect( () =>{
         const loadTasks = async () => {
         await dispatch(getTasks());
@@ -24,33 +26,43 @@ const TaskDisplay = function () {
     //eslint-disable-next-line
 }, []);
 
+let handleModalSubmit = (event, task) => {
+    event.preventDefault();
+    task.task_name = event.target.task_name.value;
+    task.task_description = event.target.task_description.value;
+   dispatch(updateTask(task));
+}
+
+let completeTask = (event, task) => {
+    event.preventDefault();
+    task.complete = !task.complete;
+    dispatch(updateTask(task));
+}
+
 let handleModal = (task) => {
     return (
         <Dialog open={modalOn} onClose={() => setModalOn(false)}>
-            <form>
-                <TextField defaultValue={task.task_name}></TextField>
-                <TextField defaultValue={task.task_description}></TextField>
+            <form onSubmit={(event) => handleModalSubmit(event, task)}>
+                <TextField  id='task_name'defaultValue={task.task_name}></TextField>
+                <TextField id='task_description' defaultValue={task.task_description}></TextField>
                 <Button type='submit'>Update</Button>
             </form>
         </Dialog>
     )
 }
 
-let trackTask = (task) => {
-
-}
-
     return (<>
-        {tasks.map((task, idx) => {
-            return (<Card id={idx} onClick={() => {setCurrentEdit(task); setModalOn(true)}}>
+        {tasks.map(task => {
+            return (<Card id={task._id} onClick={() => {setCurrentEdit(task); setModalOn(true)}}>
                 <CardContent>
                     <Typography variant='h5'>{task.task_name}</Typography>
                     <Typography variant='body1'>{task.task_description}</Typography>
+                    <Typography variant='subtitle1'>{activeTask && task._id === activeTask._id ?convertTimeReadable(activeTask.tracked_time).minutesSeconds:convertTimeReadable(task.tracked_time).minutesSeconds}</Typography>
                 </CardContent>
-                <Fab size='small' onClick={() => trackTask(task)}><PlayArrowIcon/></Fab>
-                <IconButton><CheckIcon/></IconButton>
+                <Fab size='small' onClick={() => dispatch(setActiveTask(task))}><PlayArrowIcon/></Fab>
+                <IconButton onClick={(event) => completeTask(event, task)}><CheckIcon/></IconButton>
                 <IconButton onClick={() => dispatch(deleteTask(task))}><ClearIcon/></IconButton>
-                <IconButton><TagIcon/></IconButton>
+                <IconButton ><TagIcon/></IconButton>
             </Card>)
         })}
         {modalOn ? handleModal(currentEdit): []}

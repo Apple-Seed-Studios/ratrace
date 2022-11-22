@@ -12,7 +12,6 @@ class Tasks {
     if (axiosInstance.defaults.headers.common["Authorization"]) {
       let response = await axiosInstance.get(`/tasks`);
       const data = response.data;
-      console.log(data);
       return data;
     } else {
       throw Error("No authorization on request", "getIndex");

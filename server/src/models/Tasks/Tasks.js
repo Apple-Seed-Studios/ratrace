@@ -13,6 +13,8 @@ const taskSchema = new Schema({
   task_name: { type: String, required: true },
   task_description: { type: String, required: true },
   completed: { type: Boolean, required: true },
+  tracked_time: {type: Number},
+  tags: {type: Array}
   // categories: {type: Array, required: true},
 
 });
