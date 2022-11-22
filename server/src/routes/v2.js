@@ -44,8 +44,9 @@ async function handleCreate(req, res) {
 
 async function handleUpdate(req, res) {
   const email = req.user.email;
+  const id = req.params.id;
   const obj = req.body;
-  let updatedRecord = await req.model.update(email, obj);
+  let updatedRecord = await req.model.update(id, email, obj);
   res.status(200).json(updatedRecord);
 }
 

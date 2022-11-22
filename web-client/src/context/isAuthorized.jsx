@@ -46,7 +46,7 @@ function IsAuthorized(props)
     {
         const config = {
             method: 'get',
-            baseURL: process.env.REACT_APP_SERVER,
+            baseURL: process.env.API_SERVER,
             url: '/letters',
             headers: {
                 "email": `${ user.email }`,
