@@ -14,8 +14,9 @@ function __useAuthWithTestUser__() {
     picture: testUserPicture
   }
   setupAuth(testUserToken);
-  const getIdTokenClaims = () => { };
-  return { isLoading, isAuthenticated,loginWithRedirect, logout, user, getIdTokenClaims };
+  const getIdTokenClaims = async () => { return testUserToken };
+  const getAuthClaims = async () => { return testUserToken };
+  return { isLoading, isAuthenticated,loginWithRedirect, logout, user, getIdTokenClaims, getAuthClaims  };
 }
 
 export { __useAuthWithTestUser__ };
