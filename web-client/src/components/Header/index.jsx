@@ -7,6 +7,7 @@ import AvatarPic from './Avatar';
 import LogoutButton from '../Login/LogoutButton';
 import LoginNavIcon from '../Login/LoginNavIcon';
 import ThemeButton from './ThemeButton';
+import Routing from '../Routing/index'
 import './header.scss';
 
 function Header(props)
@@ -44,6 +45,7 @@ function Header(props)
               spacing={ 1 }
               justifyContent="center"
             >
+              <Routing/>
               <ThemeButton />
               <If condition={ isAuthenticated }>
                 <Then>
