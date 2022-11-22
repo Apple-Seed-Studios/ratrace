@@ -22,34 +22,41 @@ router.put('/:model/:id', handleUpdate);
 router.delete('/:model/:id', handleDelete);
 
 async function handleGetAll(req, res) {
-  let allRecords = await req.model.get();
+  let email = req.user.email;
+  let allRecords = await req.model.getAll(email);
+  console.log('getAll results: ', allRecords);
   res.status(200).json(allRecords);
 }
 
 async function handleGetOne(req, res) {
-  const id = req.params.email;
-  let theRecord = await req.model.get(id);
+  const id = req.params.id;
+  const email = req.user.email;
+  let theRecord = await req.model.getOne(id, email);
   res.status(200).json(theRecord);
 }
 
 async function handleCreate(req, res) {
   let obj = req.body;
+  obj.email = req.user.email;
   let newRecord = await req.model.create(obj);
   res.status(201).json(newRecord);
 }
 
 async function handleUpdate(req, res) {
-  const id = req.params.email;
+  const email = req.user.email;
   const obj = req.body;
-  let updatedRecord = await req.model.update(id, obj);
+  let updatedRecord = await req.model.update(email, obj);
   res.status(200).json(updatedRecord);
 }
 
 async function handleDelete(req, res) {
-  let id = req.params.email;
-  let deletedRecord = await req.model.delete(id);
+  // id of task
+  let id = req.params.id;
+
+  // can only delete tasks associated with authorized user from auth0
+  let email = req.user.email;
+  let deletedRecord = await req.model.delete(id, email);
   res.status(200).json(deletedRecord);
 }
-
 
 module.exports = router;

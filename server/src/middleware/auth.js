@@ -53,10 +53,12 @@ function verifyUser(req, errorFirstOrUserCallback)
 */
 const verifyUser = (req, res, next) =>
 {
+  console.log('in verifyUser');
   try
   {
     if (req.headers.authorization)
     {
+      console.log('req.headers.authorization: ', req.headers.authorization);
       const token = req.headers.authorization.split(' ')[ 1 ];
 
       jwt.verify(token, getKey, (err,user) =>
@@ -65,7 +67,8 @@ const verifyUser = (req, res, next) =>
         {
           return res.status(403);
         }
-        // req.user = user; // if we want to do anything with the user or their roles, here it is
+        req.user = user; // if we want to do anything with the user or their roles, here it is
+        console.log('req.user: ', req.user);
         next();
       });
     }
