@@ -11,7 +11,8 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
 
 
-const TaskDisplay = function () {
+const TaskDisplay = function ()
+{
     let dispatch = useDispatch();
     let tasks = useSelector(state => state.tasks);
     let activeTask = useSelector(state => state.activeTask)
@@ -53,7 +54,7 @@ let handleModal = (task) => {
 
     return (<>
         {tasks.map(task => {
-            return (<Card id={task._id} onClick={() => {setCurrentEdit(task); setModalOn(true)}}>
+            return (<Card id={task._id} key={task._id} onClick={() => {setCurrentEdit(task); setModalOn(true)}}>
                 <CardContent>
                     <Typography variant='h5'>{task.task_name}</Typography>
                     <Typography variant='body1'>{task.task_description}</Typography>
@@ -64,8 +65,8 @@ let handleModal = (task) => {
                 <IconButton onClick={() => dispatch(deleteTask(task))}><ClearIcon/></IconButton>
                 <IconButton ><TagIcon/></IconButton>
             </Card>)
-        })}
-        {modalOn ? handleModal(currentEdit): []}
+        }) }
+        { modalOn ? handleModal(currentEdit) : [] }
     </>)
 
 }
