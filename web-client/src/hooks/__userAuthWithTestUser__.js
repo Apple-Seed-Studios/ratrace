@@ -1,6 +1,8 @@
+import { setupAuth } from "../lib/Collection";
 
 const testUserName = process.env.REACT_APP_TEST_USER_NAME;
 const testUserPicture = process.env.REACT_APP_TEST_USER_PICTURE;
+const testUserToken = process.env.REACT_APP_TEST_USER_TOKEN;
 
 function __useAuthWithTestUser__() {
   const isLoading = false;
@@ -11,8 +13,10 @@ function __useAuthWithTestUser__() {
     name: testUserName,
     picture: testUserPicture
   }
-  const getIdTokenClaims = () => { };
-  return { isLoading, isAuthenticated,loginWithRedirect, logout, user, getIdTokenClaims };
+  setupAuth(testUserToken);
+  const getIdTokenClaims = async () => { return testUserToken };
+  const getAuthClaims = async () => { return testUserToken };
+  return { isLoading, isAuthenticated,loginWithRedirect, logout, user, getIdTokenClaims, getAuthClaims  };
 }
 
 export { __useAuthWithTestUser__ };

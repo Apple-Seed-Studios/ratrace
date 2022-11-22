@@ -17,7 +17,7 @@ const logger = require('./middleware/logger.js');
 
 
 
-const { handleHelloWorld, getMessage, postMessage } = require('./routes/route');
+// const { handleHelloWorld, getMessage, postMessage } = require('./routes/route');
 
 
 // add validation to confirm we are wired up to our mongo DB
@@ -37,23 +37,20 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-if (process.env.SERVE_STATIC_PAGES) {
-  console.log('serving static pages from express server');
-  app.use("/", express.static("../web-client/build"));
+if (process.env.STATIC_PAGES_DIR) {
+  console.log('serving static pages from express server at', process.env.STATIC_PAGES_DIR);
+  app.use("/", express.static(process.env.STATIC_PAGES_DIR));
 }
 
 
 //Routes
 app.use(logger);
-app.get('/', (req, res) => {
-  res.send('hello');
-});
 
 app.use('/api/v1', v1);
 app.use('/api/v2', verifyUser, v2);
-app.get('/hello', handleHelloWorld);
-app.get('/messages', getMessage);
-app.post('/messages', postMessage);
+// app.get('/hello', handleHelloWorld);
+// app.get('/messages', getMessage);
+// app.post('/messages', postMessage);
 
 app.use('*', notFoundHandler);
 app.use(errorHandler);

@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
+import store from './store';
 import App from './App';
 import './index.scss'
 
@@ -19,10 +21,12 @@ root.render(
       clientId={ process.env.REACT_APP_AUTH_CLIENT_ID }
       redirectUri={ process.env.REACT_APP_AUTH_REDIRECT_URI }
     >
+    <Provider store={ store }>
       <Theme>
         <CssBaseline enableColorScheme />
         <App />
       </Theme>
+      </Provider>
     </Auth0Provider>
   </React.StrictMode>
 );
