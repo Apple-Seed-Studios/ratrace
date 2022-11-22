@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react';
 import Header from './components/Header/index';
 import Footer from './components/Footer/index';
 import Main from './components/Main/index';
-// import {
-//   BrowserRouter as Router,
-//   Routes,
-//   Route,
-//   Link
-// } from "react-router-dom";
+import About from './components/About/index';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
 import './App.scss';
 
 import { useAuth } from './hooks/useAuth';
@@ -35,8 +35,26 @@ const App = () => {
 
   return (
     <>
+    <Router>
       <Header />
       
+    
+
+      {/* A <Switch> looks through its children <Route>s and
+          renders the first one that matches the current URL. */}
+      <Routes>
+      <Route 
+          path="/about" 
+          element={<About
+          />}>
+        </Route>
+        <Route 
+          path="/" 
+          element={<Main
+          />}>
+        </Route>
+      </Routes>
+  </Router>
       { ( authSetupStatus === 'setup-complete' ? 
         <Main />
         : "Loading"
