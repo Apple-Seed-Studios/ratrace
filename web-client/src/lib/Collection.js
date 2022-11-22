@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const API_SERVER = process.env.REACT_APP_SERVER;
-
+const API_SERVER = process.env.REACT_APP_API_SERVER;
+console.log('api server: ', API_SERVER);
 const axiosInstance = axios.create({
-  baseURL: API_SERVER, // "http://localhost:5000/api/v1"
+  baseURL: API_SERVER, // "http://localhost:3001/api/v2"
 });
 
 class Tasks {

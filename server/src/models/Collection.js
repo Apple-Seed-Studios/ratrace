@@ -30,10 +30,9 @@ class Collection
     return this.model.create(record);
   }
 
-  update(id, data)
+  update(id, email, data)
   {
-    return this.model.findOne({ where: { _id: id } })
-      .then(record => record.update(data));
+    return this.model.findOneAndUpdate({ _id: id, email: email}, data, {new: true});
   }
 
   delete(id, email)

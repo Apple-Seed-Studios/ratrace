@@ -34,7 +34,7 @@ const addTask = (payload) => async (dispatch) => {
   payload.completed = false;
   // let response = await axios.post(`${API_SERVER}/api/v1/tasks`, payload);
   const data = await tasks.create(payload);
-  console.log(data);
+
   dispatch(addTaskPure(data));
 }
 
@@ -81,9 +81,12 @@ const updateTaskReducer = (state, action) => {
     const id = updatedTask._id;
     const idx = tasks.findIndex(t => t._id === id)
     if (idx > -1) {
+
       tasks[idx] = { ...tasks[idx], ...updatedTask };
+
     }
   }
+
   return tasks;
 }
 
