@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { convertTimeReadable } from '../../hooks/convertTime';
-import { getTasks, deleteTask } from '../../store/tasks';
+import { getTasks, deleteTask, updateTask } from '../../store/tasks';
 import { setActiveTask } from '../../store/activeTask';
 import { Card, CardContent, Typography, IconButton, Dialog, TextField, Button, Fab } from '@mui/material'
 import CheckIcon from '@mui/icons-material/Check';
@@ -26,12 +26,25 @@ const TaskDisplay = function () {
     //eslint-disable-next-line
 }, []);
 
+let handleModalSubmit = (event, task) => {
+    event.preventDefault();
+    task.task_name = event.target.task_name.value;
+    task.task_description = event.target.task_description.value;
+   dispatch(updateTask(task));
+}
+
+let completeTask = (event, task) => {
+    event.preventDefault();
+    task.complete = !task.complete;
+    dispatch(updateTask(task));
+}
+
 let handleModal = (task) => {
     return (
         <Dialog open={modalOn} onClose={() => setModalOn(false)}>
-            <form>
-                <TextField defaultValue={task.task_name}></TextField>
-                <TextField defaultValue={task.task_description}></TextField>
+            <form onSubmit={(event) => handleModalSubmit(event, task)}>
+                <TextField  id='task_name'defaultValue={task.task_name}></TextField>
+                <TextField id='task_description' defaultValue={task.task_description}></TextField>
                 <Button type='submit'>Update</Button>
             </form>
         </Dialog>
@@ -47,7 +60,7 @@ let handleModal = (task) => {
                     <Typography variant='subtitle1'>{activeTask && task._id === activeTask._id ?convertTimeReadable(activeTask.tracked_time).minutesSeconds:convertTimeReadable(task.tracked_time).minutesSeconds}</Typography>
                 </CardContent>
                 <Fab size='small' onClick={() => dispatch(setActiveTask(task))}><PlayArrowIcon/></Fab>
-                <IconButton><CheckIcon/></IconButton>
+                <IconButton onClick={(event) => completeTask(event, task)}><CheckIcon/></IconButton>
                 <IconButton onClick={() => dispatch(deleteTask(task))}><ClearIcon/></IconButton>
                 <IconButton ><TagIcon/></IconButton>
             </Card>)

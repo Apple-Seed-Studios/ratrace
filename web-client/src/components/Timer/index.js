@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { addTotalTime } from '../../store/user'
 import { decrementTime, setTime, endWork, endRest } from '../../store/timer';
 import { convertTimeMilliseconds, convertTimeReadable } from '../../hooks/convertTime';
+import { updateTask } from '../../store/tasks'
 import PauseIcon from '@mui/icons-material/Pause';
 import NextPlanIcon from '@mui/icons-material/NextPlan';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
@@ -40,6 +41,9 @@ const Timer = function () {
     }
     let stopTimer = () => {
         toggleTimerOn(false)
+        if(activeTask){
+            dispatch(updateTask(activeTask))
+        }
         clearInterval(intervalId)
     } 
     let countDown = () => {
