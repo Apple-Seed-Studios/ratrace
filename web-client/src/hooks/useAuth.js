@@ -4,7 +4,16 @@ import { __useAuthWithTestUser__ } from "./__userAuthWithTestUser__";
 
 function useAuthProduction() {
   const { isLoading, isAuthenticated, loginWithRedirect, logout, user, getIdTokenClaims } = useAuth0();
-  return { isLoading, isAuthenticated,loginWithRedirect, logout, user, getIdTokenClaims };
+
+  const getAuthClaims = async () => {
+    console.log('getAuthClaims');
+    if (!isAuthenticated) return ('not authenticated');
+
+    return getIdTokenClaims().then(claims => claims.__raw).catch(err => {
+      console.log("Something went wrong getting the auth claims", err);
+    })
+  }
+  return { isLoading, isAuthenticated,loginWithRedirect, logout, user, getIdTokenClaims, getAuthClaims };
 }
 
 let useAuth = useAuthProduction;

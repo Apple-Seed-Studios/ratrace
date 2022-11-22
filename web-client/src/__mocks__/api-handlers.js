@@ -1,7 +1,8 @@
 import { rest } from 'msw'
 
-const API_SERVER = process.env.REACT_APP_SERVER;
-const server = `${API_SERVER}/api/v1`;
+const API_SERVER = process.env.REACT_APP_SERVER || 'http://localhost';
+// const server = `${API_SERVER}/api/v1`;
+const server = API_SERVER;
 
 export const createHandlers = (tasks) => {
   tasks = [...tasks];

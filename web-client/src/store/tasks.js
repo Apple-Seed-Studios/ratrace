@@ -1,17 +1,17 @@
-import axios from 'axios';
+import { Tasks } from '../lib/Collection';
 
-const API_SERVER = process.env.REACT_APP_SERVER;
-
+const tasks = new Tasks();
 const initialState = [];
 
 
 export const getTasks = () => async (dispatch) => {
-  let response = await axios.get(`${API_SERVER}/api/v1/tasks`);
+  // let response = await axios.get(`${API_SERVER}/api/v1/tasks`);
+  const data = await tasks.getIndex();
+  console.log(data);
   dispatch({
     type: 'GET_TASKS',
-    payload: response.data
+    payload: data
   })
-  console.log(response.data);
   // dispatch(setTask(data.results));
 }
 
@@ -33,9 +33,9 @@ export const addTaskPure = (payload) => {
 
 const addTask = (payload) => async (dispatch) => {
   payload.completed = false;
-  let response = await axios.post(`${API_SERVER}/api/v1/tasks`, payload);
-  console.log(response.data);
-  const data = response.data;
+  // let response = await axios.post(`${API_SERVER}/api/v1/tasks`, payload);
+  const data = await tasks.create(payload);
+  console.log(data);
   dispatch(addTaskPure(data));
 }
 
@@ -47,8 +47,8 @@ export const updateTaskPure = (payload) => {
 }
 
 export const updateTask = (payload) => async (dispatch) => {
-  let response = await axios.put(`${API_SERVER}/api/v1/tasks/${payload._id}`, payload);
-  console.log(response.data);
+  // let response = await axios.put(`${API_SERVER}/api/v1/tasks/${payload._id}`, payload);
+  const response = await tasks.update(payload);
   const data = response.data;
   dispatch(updateTaskPure(data));
 }
@@ -62,8 +62,7 @@ export const deleteTaskPure = (payload) => {
 
 export const deleteTask = (payload) => async (dispatch) => {
   const _id = payload._id;
-  let response = await axios.delete(`${API_SERVER}/api/v1/tasks/${_id}`);
-  console.log(response.data);
+  const response = await tasks.delete(_id);
   const data = response.data;
   if (data.acknowledged) {
     dispatch({

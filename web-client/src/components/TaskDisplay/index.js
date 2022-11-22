@@ -19,9 +19,8 @@ const TaskDisplay = function () {
 
     return (<>
         {tasks.map(task => {
-            console.log(task);
             return (<div key={task._id}>
-            <h1>hello{task.task_name}</h1>
+            <h1>Task: {task.task_name}</h1>
             <p>{task.task_description}</p>
             </div>)
         })}
