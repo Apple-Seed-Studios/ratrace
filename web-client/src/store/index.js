@@ -5,7 +5,7 @@ import { timeReducer } from './timer';
 import thunk from 'redux-thunk';
 
 const reducers = {
-    loggedIn: userReducer,
+    user: userReducer,
     tasks: taskReducer,
     time: timeReducer,
 }
