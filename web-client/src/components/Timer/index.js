@@ -16,6 +16,7 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 const Timer = function () {
 
     let time = useSelector(state => state.time)
+    let activeTask = useSelector(state => state.activeTask)
     let audio = new Audio('../../alert.mp3')
     
     let [readableTime, setReadableTime] = useState({
@@ -77,6 +78,15 @@ const Timer = function () {
         setReadableTime(convertTimeReadable(time.time))
           //eslint-disable-next-line
     }, [time])
+
+    useEffect(() => {
+        if(activeTask){
+            if(!timerOn){
+            startTimer();
+            }
+        }
+        //eslint-disable-next-line
+    }, [activeTask])
 
     let skip = () => {
             if(workCycle){

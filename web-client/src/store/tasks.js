@@ -7,7 +7,6 @@ const initialState = [];
 export const getTasks = () => async (dispatch) => {
   // let response = await axios.get(`${API_SERVER}/api/v1/tasks`);
   const data = await tasks.getIndex();
-  console.log(data);
   dispatch({
     type: 'GET_TASKS',
     payload: data
