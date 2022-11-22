@@ -2,6 +2,12 @@ import { useState, useEffect } from 'react';
 import Header from './components/Header/index';
 import Footer from './components/Footer/index';
 import Main from './components/Main/index';
+// import {
+//   BrowserRouter as Router,
+//   Routes,
+//   Route,
+//   Link
+// } from "react-router-dom";
 import './App.scss';
 
 import { useAuth } from './hooks/useAuth';
@@ -30,6 +36,7 @@ const App = () => {
   return (
     <>
       <Header />
+      
       { ( authSetupStatus === 'setup-complete' ? 
         <Main />
         : "Loading"
