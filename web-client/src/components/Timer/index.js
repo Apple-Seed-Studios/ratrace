@@ -16,6 +16,7 @@ const Timer = function () {
 
     let time = useSelector(state => state.time)
     let audio = new Audio('../../alert.mp3')
+    
     let [readableTime, setReadableTime] = useState({
         minutesSeconds: '',
         hoursMinutesSeconds:'',
@@ -70,7 +71,8 @@ const Timer = function () {
         }
         }
         setReadableTime(convertTimeReadable(time.time))
-    }, [time, intervalId, dispatch, workCycle])
+          //eslint-disable-next-line
+    }, [time])
 
     return (<>
     {toggleEdit ? <>
