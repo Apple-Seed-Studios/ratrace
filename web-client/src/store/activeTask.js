@@ -20,12 +20,13 @@ let activeTaskReducer = (state=activeTask, action) => {
         case "DECREMENT_TIME": if(state){
             console.log(state)
             return {
-                task_name: state.task_name,
-                task_description: state.task_description,
-                __v: state.__v,
-                _id: state._id,
-                completed:state.completed,
-                tags: state.tags,
+                //task_name: state.task_name,
+                //task_description: state.task_description,
+                //__v: state.__v,
+                //_id: state._id,
+                //completed:state.completed,
+                //tags: state.tags,
+                ...state,
                 tracked_time: state.tracked_time + 1000,
             } 
         } else {return null};

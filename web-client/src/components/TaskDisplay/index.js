@@ -84,7 +84,7 @@ const TaskDisplay = function ()
                                 <CardContent onClick={ () => { setCurrentEdit(task); setModalOn(true) } }>
                                     <Typography variant='h5'>{ task.task_name }</Typography>
                                     <Typography variant='body1'>{ task.task_description }</Typography>
-                                    <Typography variant='subtitle2'>#{ task.tags[ 0 ] }</Typography>
+                                    <Typography variant='subtitle2'>#{ task.tag }</Typography>
                                     <Typography variant='subtitle1'>{ activeTask && task._id === activeTask._id ? convertTimeReadable(activeTask.tracked_time).minutesSeconds : convertTimeReadable(task.tracked_time).minutesSeconds }</Typography>
                                 </CardContent>
                                 <Fab size='small' onClick={ () => dispatch(setActiveTask(task)) }><PlayArrowIcon /></Fab>
@@ -103,7 +103,7 @@ const TaskDisplay = function ()
                                     <CardContent onClick={ () => { setCurrentEdit(task); setModalOn(true) } }>
                                         <Typography variant='h5'>{ task.task_name }</Typography>
                                         <Typography variant='body1'>{ task.task_description }</Typography>
-                                        <Typography variant='subtitle2'>#{ task.tags[ 0 ] }</Typography>
+                                        <Typography variant='subtitle2'>#{ task.tag }</Typography>
                                         <Typography variant='subtitle1'>{ activeTask && task._id === activeTask._id ? convertTimeReadable(activeTask.tracked_time).minutesSeconds : convertTimeReadable(task.tracked_time).minutesSeconds }</Typography>
                                     </CardContent>
                                     <Fab size='small' onClick={ () => dispatch(setActiveTask(task)) }><PlayArrowIcon /></Fab>
@@ -114,22 +114,6 @@ const TaskDisplay = function ()
                         }) }
                 </Else>
             </If>
-            { tasks.map(task =>
-            {
-                return (
-                    <Card id={ task._id } key={ task._id }>
-                        <CardContent onClick={ () => { setCurrentEdit(task); setModalOn(true) } }>
-                            <Typography variant='h5'>{ task.task_name }</Typography>
-                            <Typography variant='body1'>{ task.task_description }</Typography>
-                            <Typography variant='subtitle2'>#{ task.tags[ 0 ] }</Typography>
-                            <Typography variant='subtitle1'>{ activeTask && task._id === activeTask._id ? convertTimeReadable(activeTask.tracked_time).minutesSeconds : convertTimeReadable(task.tracked_time).minutesSeconds }</Typography>
-                        </CardContent>
-                        <Fab size='small' onClick={ () => dispatch(setActiveTask(task)) }><PlayArrowIcon /></Fab>
-                        <IconButton onClick={ (event) => completeTask(event, task) }><CheckIcon /></IconButton>
-                        <IconButton onClick={ () => dispatch(deleteTask(task)) }><ClearIcon /></IconButton>
-                        <IconButton ><TagIcon /></IconButton>
-                    </Card>)
-            }) }
             { modalOn ? handleModal(currentEdit) : [] }
         </>)
 
