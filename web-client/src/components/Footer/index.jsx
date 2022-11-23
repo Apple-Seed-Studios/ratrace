@@ -1,11 +1,9 @@
 import { Box, Typography } from '@mui/material/';
 import Copyright from './Copyright/index';
 import './footer.scss';
-import { useAuth } from "../../hooks/useAuth";
 
 function Footer(props)
 {
-  const { isAuthenticated } = useAuth();
   return (
     <Box 
       component="footer" 
