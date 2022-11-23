@@ -57,8 +57,8 @@ const TaskDisplay = function ()
         return (
             <Dialog open={ modalOn } onClose={ () => setModalOn(false) }>
                 <form onSubmit={ (event) => handleModalSubmit(event, task) }>
-                    <TextField id='task_name' defaultValue={ task.task_name }></TextField>
-                    <TextField id='task_description' defaultValue={ task.task_description }></TextField>
+                    <TextField id='task_name' label='Task Name' defaultValue={ task.task_name }></TextField>
+                    <TextField id='task_description' label='Task Description' defaultValue={ task.task_description }></TextField>
                     <Button type='submit'>Update</Button>
                 </form>
             </Dialog>
