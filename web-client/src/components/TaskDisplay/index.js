@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { convertTimeReadable } from '../../hooks/convertTime';
 import { getTasks, deleteTask, updateTask } from '../../store/tasks';
 import { setActiveTask } from '../../store/activeTask';
-import { Card, CardContent, Typography, IconButton, Dialog, TextField, Button, Fab } from '@mui/material'
+import { Card, CardContent, Typography, IconButton, Dialog, TextField, Button, Fab, CardActionArea } from '@mui/material'
 import CheckIcon from '@mui/icons-material/Check';
 import ClearIcon from '@mui/icons-material/Clear';
 import TagIcon from '@mui/icons-material/Tag';
@@ -72,7 +72,7 @@ const TaskDisplay = function ()
 
     return (
         <div className="taskdisplay">
-            <ToggleCompleted handleShowCompleted={ handleShowCompleted } showCompleted={showCompleted} />
+            <ToggleCompleted handleShowCompleted={ handleShowCompleted } showCompleted={ showCompleted } />
 
             <If condition={ showCompleted }>
                 <Then>
@@ -80,12 +80,14 @@ const TaskDisplay = function ()
                     {
                         return (
                             <Card id={ task._id } key={ task._id }>
-                                <CardContent onClick={ () => { setCurrentEdit(task); setModalOn(true) } }>
-                                    <Typography variant='h5'>{ task.task_name }</Typography>
-                                    <Typography variant='body1'>{ task.task_description }</Typography>
-                                    <Typography variant='subtitle2'>#{ task.tag }</Typography>
-                                    <Typography variant='subtitle1'>{ activeTask && task._id === activeTask._id ? convertTimeReadable(activeTask.tracked_time).minutesSeconds : convertTimeReadable(task.tracked_time).minutesSeconds }</Typography>
-                                </CardContent>
+                                <CardActionArea onClick={ () => { setCurrentEdit(task); setModalOn(true) } }>
+                                    <CardContent >
+                                        <Typography variant='h5'>{ task.task_name }</Typography>
+                                        <Typography variant='body1'>{ task.task_description }</Typography>
+                                        <Typography variant='subtitle2'>#{ task.tag }</Typography>
+                                        <Typography variant='subtitle1'>{ activeTask && task._id === activeTask._id ? convertTimeReadable(activeTask.tracked_time).minutesSeconds : convertTimeReadable(task.tracked_time).minutesSeconds }</Typography>
+                                    </CardContent>
+                                </CardActionArea>
                                 <Fab size='small' onClick={ () => dispatch(setActiveTask(task)) }><PlayArrowIcon /></Fab>
                                 <IconButton onClick={ (event) => completeTask(event, task) }><CheckIcon /></IconButton>
                                 <IconButton onClick={ () => dispatch(deleteTask(task)) }><ClearIcon /></IconButton>
