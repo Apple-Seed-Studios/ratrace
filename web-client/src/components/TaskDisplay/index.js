@@ -10,7 +10,7 @@ import TagIcon from '@mui/icons-material/Tag';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import ToggleCompleted from './ToggleCompleted';
 import { If, Then, Else } from 'react-if';
-
+import './TaskDisplay.scss'
 
 const TaskDisplay = function ()
 {
@@ -71,9 +71,8 @@ const TaskDisplay = function ()
     };
 
     return (
-        <>
+        <div className="taskdisplay">
             <ToggleCompleted handleShowCompleted={ handleShowCompleted } />
-
 
             <If condition={ showCompleted }>
                 <Then>
@@ -115,7 +114,7 @@ const TaskDisplay = function ()
                 </Else>
             </If>
             { modalOn ? handleModal(currentEdit) : [] }
-        </>)
+        </div>)
 
 }
 
