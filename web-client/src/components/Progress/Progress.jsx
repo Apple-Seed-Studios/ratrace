@@ -42,11 +42,13 @@ export function Progress() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ isAuthenticated ])
   useEffect(() => {
-    const loadTasks = async () => {
-      await dispatch(getTasks());
-      console.log("loaded tasks")
-    };
-    loadTasks();
+    if (isAuthenticated) {
+      const loadTasks = async () => {
+        await dispatch(getTasks());
+        console.log("loaded tasks")
+      };
+      loadTasks();
+    }
   //eslint-disable-next-line
   }, [authSetupStatus]);
   useEffect(() => { 
