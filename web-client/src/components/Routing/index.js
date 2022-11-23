@@ -14,6 +14,9 @@ export default function Routing() {
             <Link to="/">Home</Link>
           </li>
           <li>
+            <Link to="/Progress">Progress</Link>
+          </li>
+          <li>
             <Link to="/about">About</Link>
           </li>
         </ul>
