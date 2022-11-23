@@ -33,9 +33,11 @@ function Main(props)
         <Then>
           <If condition={ authSetupStatus === 'setup-complete' }>
             <Then>
+              <div class="taskpage">
               <TaskForm />
               <Timer />
               <TaskDisplay />
+              </div>
             </Then>
             <Else>
               Loading...

@@ -8,6 +8,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import ClearIcon from '@mui/icons-material/Clear';
 import TagIcon from '@mui/icons-material/Tag';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import './TaskDisplay.scss'
 
 
 
@@ -52,7 +53,7 @@ let handleModal = (task) => {
     )
 }
 
-    return (<>
+    return (<div class="taskdisplay">
         {tasks.map(task => {
             return (<Card id={task._id} key={task._id}>
                 <CardContent onClick={() => {setCurrentEdit(task); setModalOn(true)}}>
@@ -68,7 +69,7 @@ let handleModal = (task) => {
             </Card>)
         }) }
         { modalOn ? handleModal(currentEdit) : [] }
-    </>)
+    </div>)
 
 }
 
