@@ -8,22 +8,25 @@ function About(props)
  {
     return (
       <>
-       <h2>ABOUT US PAGE...</h2>
+       <h2>We are Apple Seed Studios</h2>
+       <p>  We are a group of Software Developers dedicated to growing our skills. From one seed, an orchard. Project by project, a craft.</p>
       {/* <Image/> */}
       <Carousel className="Carousel">
-        <Card>
+        <Card className="Card">
           <img
             className="d-block w-100"
             src="../../../Adrian.jpg"
             alt="Adrian Cosme-Halverson"
           />
           < CardContent>
+          <div>
             <h3>Adrian Cosme-Halverson</h3>
             <p>Fire support specialist 4+ years of honorable military service. Seasoned individual with professional work experience in a variety of dynamic and fast-paced environments. Experience in a multitude of work environments form professional office experience to months long austere environment training.</p>
+            </div>
           </ CardContent>
         </Card>
 
-        <Card>
+        <Card className="Card">
           <img
             className="d-block w-100"
             src="../../../Rhea.jpg"
@@ -32,13 +35,15 @@ function About(props)
 
           < CardContent>
             <h3>Rhea Mimi Carillo</h3>
+            <div>
             <p>
             Hi friend! I'm Rhea :cherry_blossom:. I use she/her pronouns. My background is in civil engineering but I'm now enjoying my work as a professional computer-puzzle-solver :). I like working with Java, Python, and primarily the MERN stack with JavaScript.
             </p>
+            </div>
           </ CardContent>
         </Card>
         
-        <Card>
+        <Card className="Card">
           <img
             className="d-block w-100"
             src="../../../Robert.png"
@@ -47,12 +52,15 @@ function About(props)
 
           < CardContent>
             <h3>Robert McCreary</h3>
+            <div>
             <p>
             Hi! I'm interested in building tech for the education space. I like using the MERN stack, Ruby on Rails, and Python to apps for students and teachers.
             </p>
+            </div>
           </ CardContent>
         </Card>
-        <Card>
+
+        <Card className="Card">
           <img
             className="d-block w-100"
             src="../../../Jordan.jpg"
@@ -60,10 +68,12 @@ function About(props)
           />
 
           < CardContent>
+          <div>
             <h3>Jordan Yamada</h3>
             <p>
-              Air traffic control 5+ years of honorable military service. Experience in troubleshooting, time management, and risk management.
+              Howdy. I'm a Marine Vet turned Software Developer. My strong sense of curiousity lead me here. I love the mix of creative and puzzle solving elements that coding brings about. I'm also an avid lover of all things pumpkin spiced.
             </p>
+            </div>
           </ CardContent>
         </Card>
       </Carousel>
