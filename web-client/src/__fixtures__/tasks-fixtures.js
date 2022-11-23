@@ -8,7 +8,7 @@ const mockTodoCreator = (cheese, idx) => {
     "task_name": `Buy ${ cheese } cheese`,
     "task_description": `get ${ cheese } from the local store`,
     "completed": false,
-    "tags": idx%3 ? idx%3===1 ? "school" : "job" : "exercise",
+    "tag": idx%3 ? idx%3===1 ? "school" : "job" : "exercise",
     "tracked_time": idx % 3 ? 100000 : 150000,
     "__v": 0
   }

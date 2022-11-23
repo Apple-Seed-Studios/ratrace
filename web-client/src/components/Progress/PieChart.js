@@ -2,8 +2,14 @@ import React from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 
+import { tasks } from '../../__fixtures__';
+import { reduceTasks, createDataset } from './reduce-tasks';
+
+const data = createDataset(reduceTasks(tasks));
+
 ChartJS.register(ArcElement, Tooltip, Legend);
 
+/*
 export const data = {
   labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
   datasets: [
@@ -30,7 +36,7 @@ export const data = {
     },
   ],
 };
-
+*/
 export function MyChart() {
   return <Doughnut data={data} />
   
