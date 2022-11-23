@@ -9,7 +9,7 @@ function ToggleCompleted(props)
 {
   return (
     <FormControl component="fieldset" variant="standard">
-      <FormLabel component="legend">Show Completed Tasks</FormLabel>
+      {/* <FormLabel component="legend">Show Completed Tasks</FormLabel> */}
       <FormGroup>
         <FormControlLabel
           control={
@@ -19,7 +19,7 @@ function ToggleCompleted(props)
           label={props.showCompleted ? "Show" : "Hide"}
         />
       </FormGroup>
-      <FormHelperText>Be careful</FormHelperText>
+      <FormHelperText></FormHelperText>
     </FormControl>
   );
 }
