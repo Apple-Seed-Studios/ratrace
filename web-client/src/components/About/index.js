@@ -8,8 +8,10 @@ function About(props)
  {
     return (
       <>
+      <section>
        <h2>We are Apple Seed Studios</h2>
-       <p>  We are a group of Software Developers dedicated to growing our skills. From one seed, an orchard. Project by project, a craft.</p>
+       <p>  We are a group of Software Developers dedicated to growing our skills. Planting one seed at a time, we can grow an orchard, and project by project, we can make a craft.</p>
+       </section>
       {/* <Image/> */}
       <Carousel className="Carousel">
         <Card className="Card">

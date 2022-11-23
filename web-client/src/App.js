@@ -35,8 +35,9 @@ const App = () =>
           />}>
         </Route>
       </Routes>
-  </Router>
+  
       <Footer />
+      </Router>
     </>
   );
 }

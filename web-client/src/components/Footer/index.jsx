@@ -10,7 +10,8 @@ function Footer(props)
     <Box 
       component="footer" 
       className="footer"
-      sx={{ position: isAuthenticated ? "absolute": "relative"}}
+    //   sx={{ position: isAuthenticated ? "absolute": "relative",
+    // bottom:0}}
     >
       <Typography
         variant="subtitle1"

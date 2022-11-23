@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { useState } from 'react';
 import TaskFromContent from './TaskFormContent';
 import { addTask } from '../../store/tasks';
+import './TaskForm.scss'
 
 
 const TaskForm = function () {
@@ -28,7 +29,7 @@ const TaskForm = function () {
         setShowForm(!showForm);
     }
 
-    return (<>
+    return (<div class="taskform">
     <Dialog open={showForm} onClose={toggleForm}>
         <DialogTitle>Add task</DialogTitle>
         <DialogContent>
@@ -36,7 +37,7 @@ const TaskForm = function () {
         </DialogContent>
     </Dialog>
     <Button variant='contained' onClick={toggleForm}>+ Task</Button>
-    </>)
+    </div>)
 }
 
 export default TaskForm;
