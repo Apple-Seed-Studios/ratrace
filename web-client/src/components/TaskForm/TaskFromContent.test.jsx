@@ -12,7 +12,7 @@ describe('Test TaskFormContent Component', () => {
 
     expect(screen.getByLabelText(/Task Name/)).toBeInTheDocument();
     expect(screen.getByLabelText(/Description/)).toBeInTheDocument();
-    expect(screen.getByText(/Submit/)).toBeInTheDocument();
+    expect(screen.getByText(/Save/)).toBeInTheDocument();
   });
 
   test('TaskFormContent Component Button calls handleSubmit', async () => {
@@ -25,7 +25,7 @@ describe('Test TaskFormContent Component', () => {
     // const taskDescInput = screen.getByLabelText(/Description/);
     expect(screen.getByLabelText(/Task Name/)).toBeInTheDocument();
     expect(screen.getByLabelText(/Description/)).toBeInTheDocument();
-    const taskSubmitButton = screen.getByText(/Submit/);
+    const taskSubmitButton = screen.getByText(/Save/);
     /*
     await user.click(taskNameInput);
     await user.keyboard("Buy bread");
