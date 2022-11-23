@@ -13,8 +13,18 @@ import { reduceTasks, createDataset } from './reduce-tasks';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
+const emptyDataSet = {
+  labels: [],
+  datasets: [
+    {
+      label: 'Tasks',
+      data: [],
+    }
+  ]
+};
+
 export function Progress() {
-  const [visData, setVisData] = useState({});
+  const [visData, setVisData] = useState(emptyDataSet);
   const [authSetupStatus, setAuthSetupStatus] = useState('loading');
   const dispatch = useDispatch();
   const tasks = useSelector(state => state.tasks);
@@ -46,7 +56,6 @@ export function Progress() {
   }, [tasks]);
 
   return <div>
-    { tasks.length }
     {
       visData && tasks.length>1 ?
         <Doughnut data={visData} />
