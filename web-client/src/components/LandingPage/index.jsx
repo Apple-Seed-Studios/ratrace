@@ -20,7 +20,7 @@ function LandingPage()
                     color="text.primary"
                     gutterBottom
                 >
-                    How productive are you... (Landing Page)
+                    How productive are you...
                 </Typography>
                 <Typography
                     variant="h5"
@@ -37,7 +37,6 @@ function LandingPage()
                     Most people don't have the courage to work 60 hours a day... folks like us? We're just built different. 🐀
                     <br />
                     <br />
-                    (Should we display this to users who aren't logged in?)
                 </Typography>
                 <Stack
                     sx={ { pt: 4 } }
