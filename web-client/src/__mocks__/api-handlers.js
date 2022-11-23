@@ -1,6 +1,6 @@
 import { rest } from 'msw'
 
-const API_SERVER = process.env.REACT_APP_SERVER || 'http://localhost';
+const API_SERVER = process.env.REACT_APP_API_SERVER || 'http://localhost';
 // const server = `${API_SERVER}/api/v1`;
 const server = API_SERVER;
 
