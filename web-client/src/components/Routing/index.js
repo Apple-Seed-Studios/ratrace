@@ -1,23 +1,16 @@
 import * as React from 'react';
-import {
+import
+{
   Link
 } from "react-router-dom";
+import { Button } from '@mui/material/';
 
-export default function Routing() {
+export default function Routing()
+{
   return (
-
-
-    <div>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/about">About</Link>
-          </li>
-        </ul>
-      </nav>
-      </div>
+    <>
+      <Button component={ Link } to={ '/' }>Home</Button>
+      <Button component={ Link } to={ '/about' }>About</Button>
+    </>
   );
 }
