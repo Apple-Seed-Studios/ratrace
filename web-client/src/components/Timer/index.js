@@ -70,6 +70,9 @@ const Timer = function () {
             dispatch(endWork())
             setWorkCycle(false);
             toggleTimerOn(false);
+            if(activeTask){
+                dispatch(updateTask(activeTask))
+            }
             audio.play();
         } else{
             clearInterval(intervalId)
