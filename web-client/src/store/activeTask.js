@@ -34,7 +34,7 @@ let activeTaskReducer = (state=activeTask, action) => {
     }
 }
 
-module.exports = {
+export {
     setActiveTask,
     activeTaskReducer,
 }
