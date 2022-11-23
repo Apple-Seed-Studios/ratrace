@@ -13,12 +13,12 @@ const reduceTasks = (tasks) => {
 
 const createDataset = (visData, colors) => {
   const labels = Object.keys(visData);
-  const data = Object.values(visData).map(ms => Math.floor(ms / 1000 / 60));
+  const data = Object.values(visData).map(ms => Math.floor(ms / 1000));
   return {
     labels,
     datasets: [
       {
-        label: 'Time spent in minutes',
+        label: 'Time spent in seconds',
         data,
         backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
