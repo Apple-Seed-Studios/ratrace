@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { Fab, TextField, Button, Typography} from '@mui/material';
+import { Fab, TextField, Button, Typography, Box} from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit'
 import { useState, useEffect } from 'react';
 import { addTotalTime } from '../../store/user'
@@ -127,6 +127,7 @@ const Timer = function () {
     }
 
     return (<>
+    <Box sx={{marginBottom: 10}}>
     {toggleEdit ? <>
         <form onSubmit={handleTimerSubmit}>
         <TextField {...textFieldProps} onChange={checkFormat} id='work_time' defaultValue={convertTimeReadable(time.defaultWork).minutesSeconds}/>
@@ -134,12 +135,13 @@ const Timer = function () {
         <Button type='submit'>submit</Button>
         </form>
      </>: 
-    workCycle ? <Typography variant='h5'>Work Cycle: {readableTime.minutesSeconds}</Typography>:
-     <Typography variant='h5'>Rest Cycle: {readableTime.minutesSeconds}</Typography>}
+    workCycle ? <Typography variant='h3'>Work Cycle: {readableTime.minutesSeconds}</Typography>:
+     <Typography variant='h3'>Rest Cycle: {readableTime.minutesSeconds}</Typography>}
     <Fab onClick={handleToggle} size='small'><EditIcon/></Fab>
     {timerOn ?<Fab size='small' onClick={stopTimer}><PauseIcon/></Fab>
     :<Fab size='small' onClick={startTimer}><PlayArrowIcon/></Fab>}
     <Fab size='small' onClick={() => skip()}><NextPlanIcon/></Fab>
+    </Box>
     </>)
 }
 
