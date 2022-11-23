@@ -32,6 +32,8 @@ export const data = {
 };
 
 export function MyChart() {
-  return <Doughnut data={data} />
+  return <div>
+   <Doughnut data={data} />
+   </div>
   
 }
