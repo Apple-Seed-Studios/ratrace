@@ -18,7 +18,7 @@ const TaskForm = function () {
             task_name: e.target.elements.task_name.value,
             task_description: e.target.elements.task_description.value,
             tracked_time: 0,
-            tags: [e.target.elements.tags.value],
+            tag: e.target.elements.tags.value,
 //            task_name: e.target.task_name.value,
 //            task_description: e.target.task_description.value,
         }))
