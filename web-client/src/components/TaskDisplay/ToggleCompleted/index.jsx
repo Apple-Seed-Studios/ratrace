@@ -15,7 +15,8 @@ function ToggleCompleted(props)
           control={
             <Switch onChange={ props.handleShowCompleted } name="showCompleted" />
           }
-          label="Show Completed Tasks"
+          //label="Show Completed Tasks"
+          label={props.showCompleted ? "Show" : "Hide"}
         />
       </FormGroup>
       <FormHelperText>Be careful</FormHelperText>

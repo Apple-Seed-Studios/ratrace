@@ -72,7 +72,7 @@ const TaskDisplay = function ()
 
     return (
         <div className="taskdisplay">
-            <ToggleCompleted handleShowCompleted={ handleShowCompleted } />
+            <ToggleCompleted handleShowCompleted={ handleShowCompleted } showCompleted={showCompleted} />
 
             <If condition={ showCompleted }>
                 <Then>
