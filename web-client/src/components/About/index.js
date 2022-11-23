@@ -33,7 +33,7 @@ function About(props)
           < CardContent>
             <h3>Rhea Mimi Carillo</h3>
             <p>
-              Air traffic control 5+ years of honorable military service. Experience in troubleshooting, time management, and risk management.
+            Hi friend! I'm Rhea :cherry_blossom:. I use she/her pronouns. My background is in civil engineering but I'm now enjoying my work as a professional computer-puzzle-solver :). I like working with Java, Python, and primarily the MERN stack with JavaScript.
             </p>
           </ CardContent>
         </Card>
@@ -48,7 +48,7 @@ function About(props)
           < CardContent>
             <h3>Robert McCreary</h3>
             <p>
-              Air traffic control 5+ years of honorable military service. Experience in troubleshooting, time management, and risk management.
+            Hi! I'm interested in building tech for the education space. I like using the MERN stack, Ruby on Rails, and Python to apps for students and teachers.
             </p>
           </ CardContent>
         </Card>
