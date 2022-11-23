@@ -2,7 +2,7 @@ import Header from './components/Header/index';
 import Footer from './components/Footer/index';
 import Main from './components/Main/index';
 import About from './components/About/index';
-import Chart from './components/Chart';
+import { MyChart } from './components/Progress/PieChart.js';
 import {
   BrowserRouter as Router,
   Routes,
@@ -26,7 +26,7 @@ const App = () =>
         </Route>
         <Route 
           path="/progress" 
-          element={<Chart
+          element={<MyChart
           />}>
         </Route>
         <Route 
