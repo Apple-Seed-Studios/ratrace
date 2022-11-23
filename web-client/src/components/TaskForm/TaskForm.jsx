@@ -2,7 +2,7 @@ import Button from '@mui/material/Button'
 import { Dialog, DialogTitle, DialogContent } from '@mui/material';
 import { useDispatch } from 'react-redux'
 import { useState } from 'react';
-import TaskFromContent from './TaskFormContent';
+import TaskFormContent from './TaskFormContent';
 import { addTask } from '../../store/tasks';
 import './TaskForm.scss'
 
@@ -29,11 +29,11 @@ const TaskForm = function () {
         setShowForm(!showForm);
     }
 
-    return (<div class="taskform">
+    return (<div className="taskform">
     <Dialog open={showForm} onClose={toggleForm}>
         <DialogTitle>Add task</DialogTitle>
         <DialogContent>
-                <TaskFromContent handleSubmit={handleSubmit} toggleForm={toggleForm} />
+                <TaskFormContent handleSubmit={handleSubmit} toggleForm={toggleForm} />
         </DialogContent>
     </Dialog>
     <Button variant='contained' onClick={toggleForm}>+ Task</Button>

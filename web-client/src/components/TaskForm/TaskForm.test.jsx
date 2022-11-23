@@ -57,7 +57,7 @@ describe('Test TaskForm Component', () => {
     expect(await screen.findByText(/Add Task/i)).toBeInTheDocument();
     const taskNameInput = screen.getByLabelText(/Task Name/);
     const taskDescInput = screen.getByLabelText(/Description/);
-    const taskSubmitButton = screen.getByText(/Submit/);
+    const taskSubmitButton = screen.getByText(/Save/);
     await user.click(taskNameInput);
     await user.keyboard("Buy bread");
     await user.click(taskDescInput);
