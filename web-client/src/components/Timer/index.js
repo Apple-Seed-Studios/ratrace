@@ -30,7 +30,8 @@ const Timer = function () {
     let [intervalId, setIntervalId] = useState();
     let [workCycle, setWorkCycle] = useState(true)
     let dispatch = useDispatch();
-    let [textFieldProps, setTextFieldProps] =useState({})
+    let [textFieldPropsWork, setTextFieldPropsWork] =useState({})
+    let [textFieldPropsRest, setTextFieldPropsRest] = useState({})
 
     let handleToggle = () => {
         setToggleEdit(!toggleEdit);
@@ -54,7 +55,6 @@ const Timer = function () {
     e.preventDefault();
     let splitWork = e.target.work_time.value.split(':');
     let splitRest = e.target.rest_time.value.split(':');
-    console.log(convertTimeMilliseconds(parseInt(splitRest[0]), parseInt(splitRest[1])))
     let payload = {
         workTime: convertTimeMilliseconds(parseInt(splitWork[0]), parseInt(splitWork[1])),
         restTime: convertTimeMilliseconds(parseInt(splitRest[0]), parseInt(splitRest[1])),
@@ -111,18 +111,30 @@ const Timer = function () {
 
     let checkFormat = (e) => {
         e.preventDefault();
-        let regex = /^[0-9]{2}[:][0-9]{2}$/m
-        console.log(regex.test(e.target.value))
+        let regex = /^[0-6]?[0-9]{1}[:][0-5]?[0-9]{1}$/m
+        console.log(e.target.validity)
         if(regex.test(e.target.value) === true){
-            setTextFieldProps({})
-            console.log('this should be true')
+            if(e.target.id === 'work_time'){
+                setTextFieldPropsWork({})
+            }
+            else{
+                setTextFieldPropsRest({})
+            }
+
         } 
         if(regex.test(e.target.value) === false){
-            console.log('this should be false')
-            setTextFieldProps({
-                error:true,
-                helperText:'Format 00:00',
-            })
+            if(e.target.id === 'work_time'){
+                setTextFieldPropsWork({
+                    error:true,
+                    helperText:'Format 00:00',
+                })
+            }
+            else {
+                setTextFieldPropsRest({
+                    error:true,
+                    helperText:'Format 00:00',
+                })
+            }
         }
     }
 
@@ -130,8 +142,8 @@ const Timer = function () {
     <Box sx={{marginBottom: 10}}>
     {toggleEdit ? <>
         <form onSubmit={handleTimerSubmit}>
-        <TextField {...textFieldProps} onChange={checkFormat} id='work_time' defaultValue={convertTimeReadable(time.defaultWork).minutesSeconds}/>
-        <TextField onChange={checkFormat} id='rest_time' defaultValue={convertTimeReadable(time.defaultRest).minutesSeconds}/>
+        <TextField {...textFieldPropsWork} onChange={checkFormat} id='work_time' label='Work Time' defaultValue={convertTimeReadable(time.defaultWork).minutesSeconds}/>
+        <TextField {...textFieldPropsRest} onChange={checkFormat} id='rest_time' label='Rest Time' defaultValue={convertTimeReadable(time.defaultRest).minutesSeconds}/>
         <Button type='submit'>submit</Button>
         </form>
      </>: 
