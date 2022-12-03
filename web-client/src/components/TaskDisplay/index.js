@@ -29,10 +29,6 @@ const TaskDisplay = function () {
         //eslint-disable-next-line
     }, []);
 
-    // when showCompleted changes, do something
-    useEffect(() => {
-        console.log('show completed: ', showCompleted);
-    }, [ showCompleted ])
 
     let handleModalSubmit = (event, task) => {
         event.preventDefault();
