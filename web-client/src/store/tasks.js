@@ -103,7 +103,7 @@ const taskReducer = (state = initialState, action) => {
       return action.payload;
 
     case 'ADD_TASK':
-      return [...state, action.payload]
+      return [action.payload, ...state]
 
     case 'UPDATE_TASK':
       return updateTaskReducer(state, action);
