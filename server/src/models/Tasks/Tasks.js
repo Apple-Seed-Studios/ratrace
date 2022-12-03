@@ -16,7 +16,7 @@ const taskSchema = new Schema({
   tracked_time: { type: Number },
   // tags: {type: Array},
   tag: { type: String },
-
+  created: { type: Date, default: Date.now },
 });
 
 // define the model

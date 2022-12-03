@@ -72,7 +72,7 @@ const TaskDisplay = function () {
             <If condition={ showCompleted }>
                 <Then>
                     { tasks.map(task =>
-                    {
+                    {   console.log(task)
                         return (
                             <Card variant='outlined' sx={{ backgroundColor: '#424242', marginBottom: 2 }} id={ task._id } key={ task._id }>
                                 <CardContent onClick={ () => { setCurrentEdit(task); setModalOn(true) } }>
