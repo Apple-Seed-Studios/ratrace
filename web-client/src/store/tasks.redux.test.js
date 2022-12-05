@@ -17,7 +17,7 @@ describe('Task Reducers', () => {
     let state = initialState;
     state = taskReducer(state, addTaskPure(tasks[0]));
     state = taskReducer(state, addTaskPure(tasks[1]));
-    const expectedState = [tasks[0], { ...tasks[1], task_name: 'updated task'}];
+    const expectedState = [{ ...tasks[1], task_name: 'updated task'}, tasks[0]];
     const action = updateTaskPure({_id: tasks[1]._id, task_name: 'updated task'})
     state = taskReducer(state, action);
     expect(state).toEqual(expectedState);
@@ -32,7 +32,7 @@ describe('Task Reducers', () => {
     state = taskReducer(state, addTaskPure(tasks[2]));
 
     // expectation
-    const expectedState = [tasks[0], tasks[2]];
+    const expectedState = [tasks[2], tasks[0]];
     const action = deleteTaskPure({_id: tasks[1]._id})
     state = taskReducer(state, action);
     expect(state.length).toEqual(expectedState.length);
