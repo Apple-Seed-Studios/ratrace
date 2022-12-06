@@ -1,6 +1,5 @@
 'use strict';
 
-const Messages = require('./Messages/Messages');
 const Tasks = require('./Tasks/Tasks');
 const Users = require('./Users/Users');
 
@@ -36,5 +35,4 @@ class Collection {
 module.exports = {
   users: new Collection(Users),
   tasks: new Collection(Tasks),
-  messages: new Collection(Messages),
 };
