@@ -30,8 +30,8 @@ const Timer = function () {
     let [intervalId, setIntervalId] = useState();
     let [workCycle, setWorkCycle] = useState(true)
     let dispatch = useDispatch();
-    let [textFieldPropsWork, setTextFieldPropsWork] =useState({})
-    let [textFieldPropsRest, setTextFieldPropsRest] = useState({})
+    let [textFieldPropsWork, setTextFieldPropsWork] =useState()
+    let [textFieldPropsRest, setTextFieldPropsRest] = useState()
 
     let handleToggle = () => {
         setToggleEdit(!toggleEdit);
@@ -115,10 +115,10 @@ const Timer = function () {
         console.log(e.target.validity)
         if(regex.test(e.target.value) === true){
             if(e.target.id === 'work_time'){
-                setTextFieldPropsWork({})
+                setTextFieldPropsWork()
             }
             else{
-                setTextFieldPropsRest({})
+                setTextFieldPropsRest()
             }
 
         } 
@@ -142,9 +142,9 @@ const Timer = function () {
     <Box sx={{marginBottom: 10}}>
     {toggleEdit ? <>
         <form onSubmit={handleTimerSubmit}>
-        <TextField {...textFieldPropsWork} onChange={checkFormat} id='work_time' label='Work Time' defaultValue={convertTimeReadable(time.defaultWork).minutesSeconds}/>
+        <TextField size='small' sx={{border:'0'}}{...textFieldPropsWork} onChange={checkFormat} id='work_time' label='Work Time' defaultValue={convertTimeReadable(time.defaultWork).minutesSeconds}/>
         <TextField {...textFieldPropsRest} onChange={checkFormat} id='rest_time' label='Rest Time' defaultValue={convertTimeReadable(time.defaultRest).minutesSeconds}/>
-        <Button type='submit'>submit</Button>
+        <Button disabled={textFieldPropsWork || textFieldPropsRest}type='submit'>submit</Button>
         </form>
      </>: 
     workCycle ? <Typography variant='h3'>Work Cycle: {readableTime.minutesSeconds}</Typography>:
