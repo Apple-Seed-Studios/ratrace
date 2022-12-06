@@ -28,7 +28,11 @@ db.once('open', function () {
 });
 
 //connect mongoose to mongo
-mongoose.connect(process.env.DB_URL);
+if (process.env.NODE_ENV === "test") {
+  mongoose.connect(global.__MONGO_URI__);
+} else {
+  mongoose.connect(process.env.DB_URL);
+}
 
 
 //USE
