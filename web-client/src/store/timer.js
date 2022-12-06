@@ -1,9 +1,9 @@
 
 
 let time = {
-    time: 5000,
-    defaultWork: 5000,
-    defaultRest: 5000,
+    time: 3000000,
+    defaultWork: 3000000,
+    defaultRest: 900000,
 }
 
 let setTime = (payload) => {
