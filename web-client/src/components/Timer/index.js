@@ -142,7 +142,7 @@ const Timer = function () {
     <Box sx={{marginBottom: 10}}>
     {toggleEdit ? <>
         <form onSubmit={handleTimerSubmit}>
-        <TextField {...textFieldPropsWork} onChange={checkFormat} id='work_time' label='Work Time' defaultValue={convertTimeReadable(time.defaultWork).minutesSeconds}/>
+        <TextField size='small' sx={{border:'0'}}{...textFieldPropsWork} onChange={checkFormat} id='work_time' label='Work Time' defaultValue={convertTimeReadable(time.defaultWork).minutesSeconds}/>
         <TextField {...textFieldPropsRest} onChange={checkFormat} id='rest_time' label='Rest Time' defaultValue={convertTimeReadable(time.defaultRest).minutesSeconds}/>
         <Button disabled={textFieldPropsWork || textFieldPropsRest}type='submit'>submit</Button>
         </form>

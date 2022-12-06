@@ -1,5 +1,5 @@
 import Button from '@mui/material/Button'
-import { Dialog, DialogTitle, DialogContent } from '@mui/material';
+import { Dialog, DialogContent, Box } from '@mui/material';
 import { useDispatch } from 'react-redux'
 import { useState } from 'react';
 import TaskFormContent from './TaskFormContent';
@@ -10,7 +10,6 @@ import './TaskForm.scss'
 const TaskForm = function () {
 
     let dispatch = useDispatch();
-    // let tasks = useSelector(state => state.tasks)
     let [ showForm, setShowForm ] = useState(false);
 
     let handleSubmit = (e) => {
@@ -20,8 +19,6 @@ const TaskForm = function () {
             task_description: e.target.elements.task_description.value,
             tracked_time: 0,
             tag: e.target.elements.tags.value,
-//            task_name: e.target.task_name.value,
-//            task_description: e.target.task_description.value,
         }))
     }
 
@@ -30,8 +27,7 @@ const TaskForm = function () {
     }
 
     return (<div className="taskform">
-    <Dialog open={showForm} onClose={toggleForm}>
-        <DialogTitle>Add task</DialogTitle>
+    <Dialog sx={{maxWidth: 'lg', fullWidth: 'true'}}open={showForm} onClose={toggleForm}>
         <DialogContent>
                 <TaskFormContent handleSubmit={handleSubmit} toggleForm={toggleForm} />
         </DialogContent>
