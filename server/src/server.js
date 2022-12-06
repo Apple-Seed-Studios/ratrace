@@ -6,19 +6,11 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const v1 = require('./routes/v1');
 const v2 = require('./routes/v2');
 const verifyUser = require('./middleware/auth');
 const notFoundHandler = require('./error-handlers/404.js');
 const errorHandler = require('./error-handlers/500.js');
 const logger = require('./middleware/logger.js');
-
-
-
-
-
-// const { handleHelloWorld, getMessage, postMessage } = require('./routes/route');
-
 
 // add validation to confirm we are wired up to our mongo DB
 const db = mongoose.connection;
@@ -50,11 +42,7 @@ if (process.env.STATIC_PAGES_DIR) {
 //Routes
 app.use(logger);
 
-app.use('/api/v1', v1);
 app.use('/api/v2', verifyUser, v2);
-// app.get('/hello', handleHelloWorld);
-// app.get('/messages', getMessage);
-// app.post('/messages', postMessage);
 
 app.use('*', notFoundHandler);
 app.use(errorHandler);
