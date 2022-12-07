@@ -3,6 +3,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { useState } from 'react'
 import { addTask } from '../../store/tasks';
 import { useDispatch } from 'react-redux'
+import './TaskForm.scss'
 
 const style = {
   textField: {
@@ -44,11 +45,11 @@ function TaskFromContent({ toggleForm }) {
 }
 
   return (<>
-    <form onSubmit={handleSubmit}>
+    <form id='taskFormContents' onSubmit={handleSubmit}>
       <TextField style={ style.textField } InputProps={style.InputProps} variant='standard' label='Task Name' id='task_name' required></TextField>
       <TextField style={ style.textField } InputProps={style.InputProps} variant='standard' label='Description' id='task_description' required></TextField>
       {tempTags.map((tag, idx) => {
-        return (<Chip key={idx} label={tag} onDelete={() => handleTagDelete(tag)}></Chip>)
+        return (<Chip key={idx} label={'#' + tag} onDelete={() => handleTagDelete(tag)}></Chip>)
       })}
       <Button style={ style.button } type='submit' onClick={toggleForm} variant='outlined'>Save</Button>
     </form>
