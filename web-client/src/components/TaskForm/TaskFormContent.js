@@ -1,6 +1,8 @@
 import {TextField, Button, Fab, Chip} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { useState } from 'react'
+import { addTask } from '../../store/tasks';
+import { useDispatch } from 'react-redux'
 
 const style = {
   textField: {
@@ -14,10 +16,11 @@ const style = {
   button: { margin: '10px' }
 };
 
-function TaskFromContent({ handleSubmit, toggleForm }) {
+function TaskFromContent({ toggleForm }) {
 
   let [tagFormOpen, setTagFormOpen] = useState(false)
   let [tempTags, setTempTags] = useState([]);
+  let dispatch = useDispatch();
 
   let handleTags = (e) => {
     e.preventDefault();
@@ -29,12 +32,22 @@ function TaskFromContent({ handleSubmit, toggleForm }) {
     setTempTags(newTags)
   }
 
+  let handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(addTask({
+        task_name: e.target.elements.task_name.value,
+        task_description: e.target.elements.task_description.value,
+        tracked_time: 0,
+        tag: tempTags,
+    }))
+    setTempTags([])
+}
+
   return (<>
     <form onSubmit={handleSubmit}>
       <TextField style={ style.textField } InputProps={style.InputProps} variant='standard' label='Task Name' id='task_name' required></TextField>
       <TextField style={ style.textField } InputProps={style.InputProps} variant='standard' label='Description' id='task_description' required></TextField>
       {tempTags.map((tag, idx) => {
-        console.log(tag)
         return (<Chip key={idx} label={tag} onDelete={() => handleTagDelete(tag)}></Chip>)
       })}
       <Button style={ style.button } type='submit' onClick={toggleForm} variant='outlined'>Save</Button>
