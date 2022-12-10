@@ -49,7 +49,7 @@ describe('Task Store Actions', () => {
 
 
   test('should update task', async () => {
-    const expectedState = { ...initialState, tasks: [tasks[0], tasks[1], { ...tasks[2], task_name: 'updated task'}] };
+    const expectedState = { ...initialState, tasks: [{ ...tasks[2], task_name: 'updated task'}, tasks[1], tasks[0] ] };
     const action = updateTask({_id: tasks[2]._id, task_name: 'updated task'});
     await store.dispatch(action);
     const state = store.getState();
@@ -57,7 +57,7 @@ describe('Task Store Actions', () => {
   });
 
   test('should delete task', async () => {
-    const expectedState = { ...initialState, tasks: [tasks[0], tasks[2]] };
+    const expectedState = { ...initialState, tasks: [tasks[2], tasks[0]] };
     const action = deleteTask({ _id: tasks[1]._id });
     await store.dispatch(action);
     const state = store.getState();

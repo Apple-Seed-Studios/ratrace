@@ -14,6 +14,4 @@ const mockTodoCreator = (cheese, idx) => {
   }
 };
 
-console.log(cheeseList.map(mockTodoCreator));
-
 export const tasks = cheeseList.map(mockTodoCreator);

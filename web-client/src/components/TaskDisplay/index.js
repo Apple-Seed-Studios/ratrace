@@ -29,10 +29,6 @@ const TaskDisplay = function () {
         //eslint-disable-next-line
     }, []);
 
-    // when showCompleted changes, do something
-    useEffect(() => {
-        console.log('show completed: ', showCompleted);
-    }, [ showCompleted ])
 
     let handleModalSubmit = (event, task) => {
         event.preventDefault();
@@ -76,7 +72,7 @@ const TaskDisplay = function () {
             <If condition={ showCompleted }>
                 <Then>
                     { tasks.map(task =>
-                    {
+                    {   console.log(task)
                         return (
                             <Card variant='outlined' sx={{ backgroundColor: '#424242', marginBottom: 2 }} id={ task._id } key={ task._id }>
                                 <CardContent onClick={ () => { setCurrentEdit(task); setModalOn(true) } }>
@@ -107,7 +103,9 @@ const TaskDisplay = function () {
                                       <CardActionArea>
                                         <Typography variant='h5'>{ task.task_name }</Typography>
                                         <Typography variant='body1'>{ task.task_description }</Typography>
-                                        <Typography variant='subtitle2'>#{ task.tag }</Typography>
+                                        {task.tag.map(tag => {
+                                           return (<Typography>#{tag}</Typography>)
+                                        })}
                                         <Typography variant='subtitle1'>{ activeTask && task._id === activeTask._id ? convertTimeReadable(activeTask.tracked_time).minutesSeconds : convertTimeReadable(task.tracked_time).minutesSeconds }</Typography>
                                       </CardActionArea>
                                     </CardContent>

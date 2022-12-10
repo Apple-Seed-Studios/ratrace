@@ -6,7 +6,6 @@ function useAuthProduction() {
   const { isLoading, isAuthenticated, loginWithRedirect, logout, user, getIdTokenClaims } = useAuth0();
 
   const getAuthClaims = async () => {
-    console.log('getAuthClaims');
     if (!isAuthenticated) return ('not authenticated');
 
     return getIdTokenClaims().then(claims => claims.__raw).catch(err => {

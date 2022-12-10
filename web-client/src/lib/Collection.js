@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 const API_SERVER = process.env.REACT_APP_API_SERVER;
-console.log('api server: ', API_SERVER);
 const axiosInstance = axios.create({
   baseURL: API_SERVER, // "http://localhost:3001/api/v2"
 });
@@ -58,7 +57,6 @@ class Tasks {
 
 function setupAuth(token) {
   axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  console.log("set token to", token);
 }
 
 export { Tasks, setupAuth };
