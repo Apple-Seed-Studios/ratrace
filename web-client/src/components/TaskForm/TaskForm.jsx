@@ -18,7 +18,7 @@ const TaskForm = function () {
     }
 
     return (<div className="taskform">
-    <Dialog sx={{maxWidth: 'lg', fullWidth: 'true'}}open={showForm} onClose={toggleForm}>
+    <Dialog fullWidth={true} maxWidth={'md'} open={showForm} onClose={toggleForm}>
         <DialogContent>
                 <TaskFormContent toggleForm={toggleForm} />
         </DialogContent>
