@@ -5,23 +5,12 @@ const initialState = [];
 
 
 export const getTasks = () => async (dispatch) => {
-  // let response = await axios.get(`${API_SERVER}/api/v1/tasks`);
   const data = await tasks.getIndex();
   dispatch({
     type: 'GET_TASKS',
     payload: data
   })
-  // dispatch(setTask(data.results));
 }
-
-/*
-export const setTask = (tasks) => {
-  return {
-    type: 'SET_TASK',
-    payload: tasks,
-  }
-}
-*/
 
 export const addTaskPure = (payload) => {
   return {
@@ -31,8 +20,8 @@ export const addTaskPure = (payload) => {
 }
 
 const addTask = (payload) => async (dispatch) => {
+  console.log(payload)
   payload.completed = false;
-  // let response = await axios.post(`${API_SERVER}/api/v1/tasks`, payload);
   const data = await tasks.create(payload);
 
   dispatch(addTaskPure(data));
@@ -46,7 +35,6 @@ export const updateTaskPure = (payload) => {
 }
 
 export const updateTask = (payload) => async (dispatch) => {
-  // let response = await axios.put(`${API_SERVER}/api/v1/tasks/${payload._id}`, payload);
   const response = await tasks.update(payload);
   const data = response.data;
   dispatch(updateTaskPure(data));

@@ -103,7 +103,9 @@ const TaskDisplay = function () {
                                       <CardActionArea>
                                         <Typography variant='h5'>{ task.task_name }</Typography>
                                         <Typography variant='body1'>{ task.task_description }</Typography>
-                                        <Typography variant='subtitle2'>#{ task.tag }</Typography>
+                                        {task.tag.map(tag => {
+                                           return (<Typography>#{tag}</Typography>)
+                                        })}
                                         <Typography variant='subtitle1'>{ activeTask && task._id === activeTask._id ? convertTimeReadable(activeTask.tracked_time).minutesSeconds : convertTimeReadable(task.tracked_time).minutesSeconds }</Typography>
                                       </CardActionArea>
                                     </CardContent>
