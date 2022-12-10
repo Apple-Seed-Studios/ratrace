@@ -40,8 +40,8 @@ describe('Test TaskForm Component', () => {
 
     const openButton = screen.getByText(/\+ Task/);
     await user.click(openButton);
-    expect(await screen.findByText(/Task Name/i)).toBeInTheDocument();
-    expect(await screen.findByText(/Description/i)).toBeInTheDocument();
+    expect(await screen.findByLabelText(/Task Name/i)).toBeInTheDocument();
+    expect(await screen.findByLabelText(/Description/i)).toBeInTheDocument();
     expect(await screen.findByText(/Save/i)).toBeInTheDocument();
   });
 

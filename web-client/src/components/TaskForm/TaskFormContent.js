@@ -1,4 +1,4 @@
-import { TextField, Button, Chip, Autocomplete } from '@mui/material';
+import { TextField, Button, Chip } from '@mui/material';
 import { useState } from 'react';
 import { addTask } from '../../store/tasks';
 import { useDispatch } from 'react-redux';
