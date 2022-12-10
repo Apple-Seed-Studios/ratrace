@@ -9,7 +9,7 @@ const style = {
     width: '500px'
   },
   InputProps: {
-    disableUnderline: 'true',
+    disableUnderline: true,
   },
   button: { margin: '10px' }
 };
