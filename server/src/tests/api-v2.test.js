@@ -48,7 +48,6 @@ describe('Test api-v2', () => {
   let tasksInDb;
   beforeEach(async () => {
     taskFixtures = buildTasks(mockUser.email);
-    console.log(taskFixtures)
     const promises = taskFixtures.map((task) => tasks.create(task));
     tasksInDb = await Promise.all(promises);
   });
