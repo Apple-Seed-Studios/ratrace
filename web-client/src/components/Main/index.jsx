@@ -34,7 +34,7 @@ function Main(props)
           <If condition={ authSetupStatus === 'setup-complete' }>
             <Then>
               <TaskForm/>
-              <div class="taskpage">
+              <div className="taskpage">
               <Timer />
               <TaskDisplay />
               </div>

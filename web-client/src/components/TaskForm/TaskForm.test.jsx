@@ -40,7 +40,9 @@ describe('Test TaskForm Component', () => {
 
     const openButton = screen.getByText(/\+ Task/);
     await user.click(openButton);
-    expect(await screen.findByText(/Add Task/i)).toBeInTheDocument();
+    expect(await screen.findByLabelText(/Task Name/i)).toBeInTheDocument();
+    expect(await screen.findByLabelText(/Description/i)).toBeInTheDocument();
+    expect(await screen.findByText(/Save/i)).toBeInTheDocument();
   });
 
   test('should call dispatch on submit', async () => {
@@ -54,7 +56,6 @@ describe('Test TaskForm Component', () => {
 
     const openButton = screen.getByText(/\+ Task/);
     await user.click(openButton);
-    expect(await screen.findByText(/Add Task/i)).toBeInTheDocument();
     const taskNameInput = screen.getByLabelText(/Task Name/);
     const taskDescInput = screen.getByLabelText(/Description/);
     const taskSubmitButton = screen.getByText(/Save/);
