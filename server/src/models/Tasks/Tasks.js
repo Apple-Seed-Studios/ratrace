@@ -14,7 +14,6 @@ const taskSchema = new Schema({
   task_description: { type: String, required: false },
   completed: { type: Boolean, required: true },
   tracked_time: { type: Number },
-  // tags: {type: Array},
   tag: { type: Array },
   created: { type: Date, default: Date.now },
 });

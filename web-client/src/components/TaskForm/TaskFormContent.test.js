@@ -1,14 +1,31 @@
 import { screen, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
-
 import '@testing-library/jest-dom';
+
 import TaskFormContent from './TaskFormContent';
 
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware  } from 'redux'
+import thunk from 'redux-thunk';
+
+let store;
+
+const mockReducer = jest.fn((state, action) => state);
+
+
 describe('Test TaskFormContent Component', () => {
+  let toggleForm;
+  beforeEach(() => {
+    jest.clearAllMocks();
+    store = createStore(mockReducer, applyMiddleware(thunk));
+    toggleForm = jest.fn();
+  });
   test('TaskFormContent Component to render', async () => {
-    const handleSubmit = jest.fn((e) => { e.preventDefault(); });
-    const toggleForm = jest.fn();
-    render(<TaskFormContent {...{handleSubmit, toggleForm}} />);
+    render(
+      <Provider store={store}>
+        <TaskFormContent {...{ toggleForm }} />
+      </Provider>
+    );
 
     expect(screen.getByLabelText(/Task Name/)).toBeInTheDocument();
     expect(screen.getByLabelText(/Description/)).toBeInTheDocument();
@@ -16,26 +33,30 @@ describe('Test TaskFormContent Component', () => {
   });
 
   test('TaskFormContent Component Button calls handleSubmit', async () => {
-    const handleSubmit = jest.fn((e) => e.preventDefault());
-    const toggleForm = jest.fn();
+    render(
+      <Provider store={store}>
+        <TaskFormContent {...{ toggleForm }} />
+      </Provider>
+    );
 
     const user = userEvent.setup()
-    render(<TaskFormContent {...{handleSubmit, toggleForm}} />);
-    // const taskNameInput = screen.getByLabelText(/Task Name/);
-    // const taskDescInput = screen.getByLabelText(/Description/);
+    const taskNameInput = screen.getByLabelText(/Task Name/);
+    const taskDescInput = screen.getByLabelText(/Description/);
     expect(screen.getByLabelText(/Task Name/)).toBeInTheDocument();
     expect(screen.getByLabelText(/Description/)).toBeInTheDocument();
     const taskSubmitButton = screen.getByText(/Save/);
-    /*
     await user.click(taskNameInput);
     await user.keyboard("Buy bread");
     await user.click(taskDescInput);
     await user.keyboard("Pumpkin seed");
-    */
     await user.click(taskSubmitButton);
 
-    // const expectedEvent = { target: { task_name: { value: "Buy Bread" } } };
-
-    expect(handleSubmit).toHaveBeenCalled();
+    expect(mockReducer).toHaveBeenCalledWith(undefined, {
+      payload: expect.objectContaining({
+        task_name: "Buy bread",
+        task_description: "Pumpkin seed"
+      }),
+      type: 'ADD_TASK'
+    });
   });
 });
