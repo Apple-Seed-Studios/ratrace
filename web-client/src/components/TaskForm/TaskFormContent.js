@@ -6,7 +6,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import Grid from '@mui/material/Unstable_Grid2';
 
-function TaskFromContent({ toggleForm }) {
+function TaskFromContent({ toggleForm, editTask}) {
 
   let [tagFormOpen, setTagFormOpen] = useState(false)
   let [tempTags, setTempTags] = useState([]);
@@ -44,13 +44,13 @@ function TaskFromContent({ toggleForm }) {
   return (<>
     <Grid container spacing={2}>
       <Grid item xs={10} sm={10} md={10} lg={10}>
-        <TextField fullWidth onChange={(e) => setTaskName(e.target.value)} variant='outlined' label='Task Name' id='task_name' required></TextField>
+        <TextField defaultValue={editTask ? editTask.task_name: ''} fullWidth onChange={(e) => setTaskName(e.target.value)} variant='outlined' label='Task Name' id='task_name' required></TextField>
       </Grid>
       <Grid item xs={2} sm={2} md={2} lg={2}>
         <Button sx={{ marginTop: '15%', width: '50%' }} size='small' onClick={() => { toggleForm(); handleSubmit(); }} variant='outlined'>Save</Button>
       </Grid>
       <Grid item xs={10} sm={10} md={10} lg={10}>
-        <TextField fullWidth multiline rows={4} onChange={(e) => setTaskDescription(e.target.value)} variant='outlined' label='Description' id='task_description' required></TextField>
+        <TextField defaultValue={editTask ? editTask.task_description: ''} fullWidth multiline rows={4} onChange={(e) => setTaskDescription(e.target.value)} variant='outlined' label='Description' id='task_description' required></TextField>
       </Grid>
       {tagFormOpen
         ? <>
