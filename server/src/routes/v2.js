@@ -24,7 +24,6 @@ router.delete('/:model/:id', handleDelete);
 async function handleGetAll(req, res) {
   let email = req.user.email;
   let allRecords = await req.model.getAll(email);
-  console.log('getAll results: ', allRecords);
   res.status(200).json(allRecords);
 }
 

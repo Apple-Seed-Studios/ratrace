@@ -1,42 +1,33 @@
 'use strict';
 
-const Messages = require('./Messages/Messages');
 const Tasks = require('./Tasks/Tasks');
 const Users = require('./Users/Users');
 
-class Collection
-{
+class Collection {
 
-  constructor(model)
-  {
+  constructor(model) {
     this.model = model;
   }
 
-  getOne(id, email)
-  {
+  getOne(id, email) {
     console.log(id);
-
     return this.model.findOne({ _id: id, email: email });
   }
 
-  getAll(email)
-  {
+  getAll(email) {
     console.log('email in getAll: ', email);
     return this.model.find({ email: email });
   }
 
-  create(record)
-  {
+  create(record) {
     return this.model.create(record);
   }
 
-  update(id, email, data)
-  {
-    return this.model.findOneAndUpdate({ _id: id, email: email}, data, {new: true});
+  update(id, email, data) {
+    return this.model.findOneAndUpdate({ _id: id, email: email }, data, { new: true });
   }
 
-  delete(id, email)
-  {
+  delete(id, email) {
     return this.model.deleteOne({ _id: id, email: email });
   }
 }
@@ -44,5 +35,4 @@ class Collection
 module.exports = {
   users: new Collection(Users),
   tasks: new Collection(Tasks),
-  messages: new Collection(Messages),
 };
