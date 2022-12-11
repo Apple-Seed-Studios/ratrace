@@ -139,3 +139,7 @@ dist
 ### VisualStudioCode Patch ###
 # Ignore all local history of files
 **/.history
+
+
+jest-html-reporters-attach/
+jest_html_reporters.html
