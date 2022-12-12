@@ -1,13 +1,13 @@
-'use strict';
+"use strict";
 
 /* REQUIRE */
 // jwt - JSON Web Token package
 // pronounced: 'jot'
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
 // jwks - JSON Web Key Set package
 // (pronounced Ja-wicks)
-const jwksClient = require('jwks-rsa');
+const jwksClient = require("jwks-rsa");
 
 // don't forget to 'npm i jsonwebtoken jwks-rsa
 
@@ -20,10 +20,8 @@ const client = jwksClient({
 // function is from the jsonwebtoken docs
 // https://www.npmjs.com/package/jsonwebtoken
 // (search for auth0)
-function getKey(header, callback)
-{
-  client.getSigningKey(header.kid, function (err, key)
-  {
+function getKey(header, callback) {
+  client.getSigningKey(header.kid, function (err, key) {
     let signingKey = key.publicKey || key.rsaPublicKey;
     callback(null, signingKey);
   });
@@ -51,35 +49,26 @@ function verifyUser(req, errorFirstOrUserCallback)
   }
 }
 */
-const verifyUser = (req, res, next) =>
-{
-  console.log('in verifyUser');
-  try
-  {
-    if (req.headers.authorization)
-    {
-      console.log('req.headers.authorization: ', req.headers.authorization);
-      const token = req.headers.authorization.split(' ')[ 1 ];
+const verifyUser = (req, res, next) => {
+  console.log("in verifyUser");
+  try {
+    if (req.headers.authorization) {
+      console.log("req.headers.authorization: ", req.headers.authorization);
+      const token = req.headers.authorization.split(" ")[1];
 
-      jwt.verify(token, getKey, (err,user) =>
-      {
-        if (err)
-        {
+      jwt.verify(token, getKey, (err, user) => {
+        if (err) {
           return res.status(403);
         }
         req.user = user; // if we want to do anything with the user or their roles, here it is
-        console.log('req.user: ', req.user);
+        console.log("req.user: ", req.user);
         next();
       });
-    }
-    else
-    {
+    } else {
       res.status(401);
     }
-  }
-  catch (err)
-  {
-    next('invalid login');
+  } catch (err) {
+    next("invalid login");
   }
 };
 

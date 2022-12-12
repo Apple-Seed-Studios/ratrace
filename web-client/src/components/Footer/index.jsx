@@ -1,15 +1,14 @@
-import { Box, Typography } from '@mui/material/';
-import Copyright from './Copyright/index';
-import './footer.scss';
+import { Box, Typography } from "@mui/material/";
+import Copyright from "./Copyright/index";
+import "./footer.scss";
 
-function Footer(props)
-{
+function Footer(props) {
   return (
-    <Box 
-      component="footer" 
+    <Box
+      component="footer"
       className="footer"
-    //   sx={{ position: isAuthenticated ? "absolute": "relative",
-    // bottom:0}}
+      //   sx={{ position: isAuthenticated ? "absolute": "relative",
+      // bottom:0}}
     >
       <Typography
         variant="subtitle1"
@@ -21,7 +20,7 @@ function Footer(props)
       </Typography>
       <Copyright />
     </Box>
-  )
+  );
 }
 
 export default Footer;

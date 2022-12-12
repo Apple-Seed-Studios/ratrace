@@ -1,10 +1,9 @@
-'use strict';
+"use strict";
 
-const Tasks = require('./Tasks/Tasks');
-const Users = require('./Users/Users');
+const Tasks = require("./Tasks/Tasks");
+const Users = require("./Users/Users");
 
 class Collection {
-
   constructor(model) {
     this.model = model;
   }
@@ -15,7 +14,7 @@ class Collection {
   }
 
   getAll(email) {
-    console.log('email in getAll: ', email);
+    console.log("email in getAll: ", email);
     return this.model.find({ email: email });
   }
 
@@ -24,7 +23,9 @@ class Collection {
   }
 
   update(id, email, data) {
-    return this.model.findOneAndUpdate({ _id: id, email: email }, data, { new: true });
+    return this.model.findOneAndUpdate({ _id: id, email: email }, data, {
+      new: true,
+    });
   }
 
   delete(id, email) {

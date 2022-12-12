@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 const API_SERVER = process.env.REACT_APP_API_SERVER;
 const axiosInstance = axios.create({
@@ -6,7 +6,6 @@ const axiosInstance = axios.create({
 });
 
 class Tasks {
-
   async getIndex() {
     if (axiosInstance.defaults.headers.common["Authorization"]) {
       let response = await axiosInstance.get(`/tasks`);
@@ -26,7 +25,7 @@ class Tasks {
     }
   }
 
-  async create(task) { 
+  async create(task) {
     if (axiosInstance.defaults.headers.common["Authorization"]) {
       const response = await axiosInstance.post(`/tasks`, task);
       const data = response.data;
@@ -36,7 +35,7 @@ class Tasks {
     }
   }
 
-  async update(task) { 
+  async update(task) {
     if (axiosInstance.defaults.headers.common["Authorization"]) {
       const data = await axiosInstance.put(`/tasks/${task._id}`, task);
       return data;
