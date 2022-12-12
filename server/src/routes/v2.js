@@ -1,25 +1,25 @@
-'use strict';
+"use strict";
 
-const express = require('express');
-const dataModules = require('../models/Collection');
+const express = require("express");
+const dataModules = require("../models/Collection");
 
 const router = express.Router();
 
-router.param('model', (req, res, next) => {
+router.param("model", (req, res, next) => {
   const modelName = req.params.model;
   if (dataModules[modelName]) {
     req.model = dataModules[modelName];
     next();
   } else {
-    next('Invalid Model');
+    next("Invalid Model");
   }
 });
 
-router.get('/:model', handleGetAll);
-router.get('/:model/:id', handleGetOne);
-router.post('/:model', handleCreate);
-router.put('/:model/:id', handleUpdate);
-router.delete('/:model/:id', handleDelete);
+router.get("/:model", handleGetAll);
+router.get("/:model/:id", handleGetOne);
+router.post("/:model", handleCreate);
+router.put("/:model/:id", handleUpdate);
+router.delete("/:model/:id", handleDelete);
 
 async function handleGetAll(req, res) {
   let email = req.user.email;

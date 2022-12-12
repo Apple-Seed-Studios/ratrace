@@ -1,47 +1,43 @@
-import Timer from '../Timer';
-import TaskForm from '../TaskForm';
-import TaskDisplay from '../TaskDisplay';
-import LandingPage from '../LandingPage';
-import { If, Then, Else } from 'react-if';
-import './main.scss';
+import Timer from "../Timer";
+import TaskForm from "../TaskForm";
+import TaskDisplay from "../TaskDisplay";
+import LandingPage from "../LandingPage";
+import { If, Then, Else } from "react-if";
+import "./main.scss";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 import { useAuth } from "../../hooks/useAuth";
 
-import { setupAuth } from '../../lib/Collection';
+import { setupAuth } from "../../lib/Collection";
 
-function Main(props)
-{
-  const [ authSetupStatus, setAuthSetupStatus ] = useState('loading');
+function Main(props) {
+  const [authSetupStatus, setAuthSetupStatus] = useState("loading");
   const { isAuthenticated, getAuthClaims } = useAuth();
-  useEffect(() =>
-  {
-    const setup = async () =>
-    {
+  useEffect(() => {
+    const setup = async () => {
       const token = await getAuthClaims();
       setupAuth(token);
-      setAuthSetupStatus('setup-complete');
-
+      setAuthSetupStatus("setup-complete");
+    };
+    if (isAuthenticated) {
+      setup();
     }
-    if (isAuthenticated) { setup(); }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ isAuthenticated ])
+  }, [isAuthenticated]);
   return (
     <main className="main">
-      <If condition={ isAuthenticated }>
+      <If condition={isAuthenticated}>
         <Then>
-          <If condition={ authSetupStatus === 'setup-complete' }>
+          <If condition={authSetupStatus === "setup-complete"}>
             <Then>
-              <TaskForm/>
+              <TaskForm />
               <div className="taskpage">
-              <Timer />
-              <TaskDisplay />
+                <Timer />
+                <TaskDisplay />
               </div>
             </Then>
-            <Else>
-              Loading...
-            </Else>
+            <Else>Loading...</Else>
           </If>
         </Then>
         <Else>
@@ -49,7 +45,7 @@ function Main(props)
         </Else>
       </If>
     </main>
-  )
+  );
 }
 
 export default Main;

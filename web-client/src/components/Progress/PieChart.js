@@ -1,9 +1,9 @@
-import React from 'react';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { Doughnut } from 'react-chartjs-2';
+import React from "react";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Doughnut } from "react-chartjs-2";
 
-import { tasks } from '../../__fixtures__';
-import { reduceTasks, createDataset } from './reduce-tasks';
+import { tasks } from "../../__fixtures__";
+import { reduceTasks, createDataset } from "./reduce-tasks";
 
 const data = createDataset(reduceTasks(tasks));
 
@@ -38,8 +38,9 @@ export const data = {
 };
 */
 export function MyChart() {
-  return <div>
-   <Doughnut data={data} />
-   </div>
-  
+  return (
+    <div>
+      <Doughnut data={data} />
+    </div>
+  );
 }

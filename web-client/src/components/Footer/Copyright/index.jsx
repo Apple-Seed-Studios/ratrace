@@ -1,15 +1,10 @@
-import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
+import Typography from "@mui/material/Typography";
+import Link from "@mui/material/Link";
 
-function Copyright()
-{
+function Copyright() {
   return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-    >
-      { '  Copyright © ' }
+    <Typography variant="body2" color="text.secondary" align="center">
+      {"  Copyright © "}
       <Link
         color="inherit"
         rel="noopener noreferrer"
@@ -17,9 +12,9 @@ function Copyright()
         href="https://github.com/Apple-Seed-Studios"
       >
         Apple Seed Studios 🐀
-      </Link>{ ' ' }
-      { new Date().getFullYear() }
-      { '.' }
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
     </Typography>
   );
 }
