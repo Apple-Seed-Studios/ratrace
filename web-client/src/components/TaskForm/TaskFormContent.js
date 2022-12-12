@@ -1,12 +1,12 @@
 import { TextField, Button, Chip } from '@mui/material';
-import { useState } from 'react';
-import { addTask } from '../../store/tasks';
+import { useState, useEffect } from 'react';
+import { addTask, updateTask } from '../../store/tasks';
 import { useDispatch } from 'react-redux';
 import CheckIcon from '@mui/icons-material/Check';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import Grid from '@mui/material/Unstable_Grid2';
 
-function TaskFromContent({ toggleForm }) {
+function TaskFromContent({ toggleForm, editTask}) {
 
   let [tagFormOpen, setTagFormOpen] = useState(false)
   let [tempTags, setTempTags] = useState([]);
@@ -15,6 +15,15 @@ function TaskFromContent({ toggleForm }) {
   let [newTag, setNewTag] = useState('')
 
   let dispatch = useDispatch();
+
+  useEffect(() => {
+    if(editTask){
+      setTempTags(editTask.tag);
+      setTaskName(editTask.task_name);
+      setTaskDescription(editTask.task_description);
+    }
+ //eslint-disable-next-line
+  },[])
 
   let handleTags = (e) => {
     e.preventDefault();
@@ -30,12 +39,20 @@ function TaskFromContent({ toggleForm }) {
   }
 
   let handleSubmit = () => {
+    if(editTask){
+      editTask.task_name = taskName;
+      editTask.task_description = taskDescription;
+      editTask.tag = tempTags;
+      dispatch(updateTask(editTask));
+    }
+    else{
     dispatch(addTask({
       task_name: taskName,
       task_description: taskDescription,
       tracked_time: 0,
       tag: tempTags,
-    }))
+      }))
+    }
     setTempTags([])
     setTaskName('')
     setTaskDescription('')
@@ -43,18 +60,18 @@ function TaskFromContent({ toggleForm }) {
 
   return (<>
     <Grid container spacing={2}>
-      <Grid item lg={10}>
-        <TextField fullWidth onChange={(e) => setTaskName(e.target.value)} variant='outlined' label='Task Name' id='task_name' required></TextField>
+      <Grid item xs={10} sm={10} md={10} lg={10}>
+        <TextField defaultValue={editTask ? editTask.task_name: ''} fullWidth onChange={(e) => setTaskName(e.target.value)} variant='outlined' label='Task Name' id='task_name' required></TextField>
       </Grid>
-      <Grid item lg={2}>
+      <Grid item xs={2} sm={2} md={2} lg={2}>
         <Button sx={{ marginTop: '15%', width: '50%' }} size='small' onClick={() => { toggleForm(); handleSubmit(); }} variant='outlined'>Save</Button>
       </Grid>
-      <Grid item lg={10}>
-        <TextField fullWidth multiline rows={4} onChange={(e) => setTaskDescription(e.target.value)} variant='outlined' label='Description' id='task_description' required></TextField>
+      <Grid item xs={10} sm={10} md={10} lg={10}>
+        <TextField defaultValue={editTask ? editTask.task_description: ''} fullWidth multiline rows={4} onChange={(e) => setTaskDescription(e.target.value)} variant='outlined' label='Description' id='task_description' required></TextField>
       </Grid>
       {tagFormOpen
         ? <>
-          <Grid item lg={2}>
+          <Grid item xs={2} sm={2} md={2} lg={2}>
             {/* Foundation for tag suggestion, do not delete */}
             {/* <Autocomplete
               options={[]}
@@ -68,13 +85,12 @@ function TaskFromContent({ toggleForm }) {
               <Button size='small' onClick={() => setTagFormOpen(false)}><HighlightOffIcon/></Button>
             </Grid>
         </>
-        : <Grid item lg={2}>
+        : <Grid item xs={2} sm={2} md={2} lg={2}>
           <Chip color='primary' label='+ Tag' onClick={() => setTagFormOpen(true)}></Chip>
         </Grid>
       }
-      <Grid item lg={10}>
+      <Grid item xs={10} sm={10} md={10} lg={10}>
         {tempTags.map((tag, idx) => {
-          console.log(tag)
           return (<Chip key={idx} label={tag} onDelete={() => handleTagDelete(tag)}></Chip>)
         })}
 
