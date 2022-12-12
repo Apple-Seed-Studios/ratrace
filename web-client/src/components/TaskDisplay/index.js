@@ -3,10 +3,9 @@ import { useEffect, useState } from 'react';
 import { convertTimeReadable } from '../../hooks/convertTime';
 import { getTasks, deleteTask, updateTask } from '../../store/tasks';
 import { setActiveTask } from '../../store/activeTask';
-import { Card, CardContent, Typography, IconButton, Dialog, DialogContent, TextField, Button, Fab, CardActionArea } from '@mui/material'
+import { Card, CardContent, Typography, IconButton, Dialog, DialogContent, Fab, CardActionArea } from '@mui/material'
 import CheckIcon from '@mui/icons-material/Check';
 import ClearIcon from '@mui/icons-material/Clear';
-import TagIcon from '@mui/icons-material/Tag';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import ToggleCompleted from './ToggleCompleted';
 import { If, Then, Else } from 'react-if';
@@ -30,14 +29,6 @@ const TaskDisplay = function () {
         //eslint-disable-next-line
     }, []);
 
-
-    // let handleModalSubmit = (event, task) => {
-    //     event.preventDefault();
-    //     task.task_name = event.target.task_name.value;
-    //     task.task_description = event.target.task_description.value;
-    //     dispatch(updateTask(task));
-    // }
-
     let completeTask = (event, task) => {
         event.preventDefault();
         task.complete = !task.complete;
@@ -46,13 +37,6 @@ const TaskDisplay = function () {
 
     let editForm = () => {
         return (
-            // <Dialog open={ modalOn } onClose={ () => setModalOn(false) }>
-            //     <form onSubmit={ (event) => handleModalSubmit(event, task) }>
-            //         <TextField id='task_name' label='Task Name' defaultValue={ task.task_name }></TextField>
-            //         <TextField id='task_description' label='Task Description' defaultValue={ task.task_description }></TextField>
-            //         <Button type='submit'>Update</Button>
-            //     </form>
-            // </Dialog>
             <Dialog fullWidth={true} maxWidth={'md'} open={modalOn} onClose={toggleForm}>
                 <DialogContent>
                     <TaskFromContent toggleForm={toggleForm} editTask={currentEdit}/>
@@ -98,7 +82,6 @@ const TaskDisplay = function () {
                                     <CheckIcon />
                                 </IconButton>
                                 <IconButton onClick={ () => dispatch(deleteTask(task)) }><ClearIcon /></IconButton>
-                                <IconButton ><TagIcon /></IconButton>
                             </Card>)
                     }) }
                 </Then>
@@ -121,7 +104,6 @@ const TaskDisplay = function () {
                                     <Fab size='small' onClick={ () => dispatch(setActiveTask(task)) }><PlayArrowIcon /></Fab>
                                     <IconButton onClick={ (event) => completeTask(event, task) }><CheckIcon /></IconButton>
                                     <IconButton onClick={ () => dispatch(deleteTask(task)) }><ClearIcon /></IconButton>
-                                    <IconButton ><TagIcon /></IconButton>
                                 </Card>)
                         }) }
                 </Else>
