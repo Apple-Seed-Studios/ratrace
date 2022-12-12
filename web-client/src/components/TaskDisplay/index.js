@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { convertTimeReadable } from '../../hooks/convertTime';
 import { getTasks, deleteTask, updateTask } from '../../store/tasks';
 import { setActiveTask } from '../../store/activeTask';
-import { Card, CardContent, Typography, IconButton, Dialog, TextField, Button, Fab, CardActionArea } from '@mui/material'
+import { Card, CardContent, Typography, IconButton, Dialog, DialogContent, TextField, Button, Fab, CardActionArea } from '@mui/material'
 import CheckIcon from '@mui/icons-material/Check';
 import ClearIcon from '@mui/icons-material/Clear';
 import TagIcon from '@mui/icons-material/Tag';
@@ -11,6 +11,7 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import ToggleCompleted from './ToggleCompleted';
 import { If, Then, Else } from 'react-if';
 import './TaskDisplay.scss'
+import TaskFromContent from '../TaskForm/TaskFormContent'
 
 const TaskDisplay = function () {
     let dispatch = useDispatch();
@@ -30,12 +31,12 @@ const TaskDisplay = function () {
     }, []);
 
 
-    let handleModalSubmit = (event, task) => {
-        event.preventDefault();
-        task.task_name = event.target.task_name.value;
-        task.task_description = event.target.task_description.value;
-        dispatch(updateTask(task));
-    }
+    // let handleModalSubmit = (event, task) => {
+    //     event.preventDefault();
+    //     task.task_name = event.target.task_name.value;
+    //     task.task_description = event.target.task_description.value;
+    //     dispatch(updateTask(task));
+    // }
 
     let completeTask = (event, task) => {
         event.preventDefault();
@@ -43,16 +44,25 @@ const TaskDisplay = function () {
         dispatch(updateTask(task));
     }
 
-    let handleModal = (task) => {
+    let editForm = () => {
         return (
-            <Dialog open={ modalOn } onClose={ () => setModalOn(false) }>
-                <form onSubmit={ (event) => handleModalSubmit(event, task) }>
-                    <TextField id='task_name' label='Task Name' defaultValue={ task.task_name }></TextField>
-                    <TextField id='task_description' label='Task Description' defaultValue={ task.task_description }></TextField>
-                    <Button type='submit'>Update</Button>
-                </form>
+            // <Dialog open={ modalOn } onClose={ () => setModalOn(false) }>
+            //     <form onSubmit={ (event) => handleModalSubmit(event, task) }>
+            //         <TextField id='task_name' label='Task Name' defaultValue={ task.task_name }></TextField>
+            //         <TextField id='task_description' label='Task Description' defaultValue={ task.task_description }></TextField>
+            //         <Button type='submit'>Update</Button>
+            //     </form>
+            // </Dialog>
+            <Dialog fullWidth={true} maxWidth={'md'} open={modalOn} onClose={toggleForm}>
+                <DialogContent>
+                    <TaskFromContent toggleForm={toggleForm} editTask={currentEdit}/>
+                </DialogContent>
             </Dialog>
         )
+    }
+
+    let toggleForm = () => {
+        setModalOn(!modalOn)
     }
 
     const handleShowCompleted = () => {
@@ -72,14 +82,14 @@ const TaskDisplay = function () {
             <If condition={ showCompleted }>
                 <Then>
                     { tasks.map(task =>
-                    {   console.log(task)
+                    {  console.log(task.tag)
                         return (
                             <Card variant='outlined' sx={{ backgroundColor: '#424242', marginBottom: 2 }} id={ task._id } key={ task._id }>
                                 <CardContent onClick={ () => { setCurrentEdit(task); setModalOn(true) } }>
                                     <CardActionArea>
                                             <Typography style={ task.complete ? completedTextStyle : notCompletedTextStyle } variant='h5'>{ task.task_name }</Typography>
                                             <Typography style={task.complete ? completedTextStyle : notCompletedTextStyle} variant='body1'>{ task.task_description }</Typography>
-                                            <Typography variant='subtitle2'>#{ task.tag }</Typography>
+                                            {task.tag ? console.log(task.tag.map(t => { return (<Typography variant='subtitle2'>{t}</Typography>)})) : []}
                                             <Typography variant='subtitle1'>{ activeTask && task._id === activeTask._id ? convertTimeReadable(activeTask.tracked_time).minutesSeconds : convertTimeReadable(task.tracked_time).minutesSeconds }</Typography>
                                     </CardActionArea>
                                 </CardContent>
@@ -103,9 +113,7 @@ const TaskDisplay = function () {
                                       <CardActionArea>
                                         <Typography variant='h5'>{ task.task_name }</Typography>
                                         <Typography variant='body1'>{ task.task_description }</Typography>
-                                        {task.tag.map(tag => {
-                                           return (<Typography>#{tag}</Typography>)
-                                        })}
+                                        {task.tag ? task.tag.map(t => { return (<Typography variant='subtitle2'>#{t}</Typography>)}) : []}
                                         <Typography variant='subtitle1'>{ activeTask && task._id === activeTask._id ? convertTimeReadable(activeTask.tracked_time).minutesSeconds : convertTimeReadable(task.tracked_time).minutesSeconds }</Typography>
                                       </CardActionArea>
                                     </CardContent>
@@ -118,7 +126,7 @@ const TaskDisplay = function () {
                         }) }
                 </Else>
             </If>
-            { modalOn ? handleModal(currentEdit) : [] }
+            { modalOn ? editForm() : [] }
         </div>)
 
 }
