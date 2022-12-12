@@ -1,6 +1,6 @@
 import { TextField, Button, Chip } from '@mui/material';
-import { useState } from 'react';
-import { addTask } from '../../store/tasks';
+import { useState, useEffect } from 'react';
+import { addTask, updateTask } from '../../store/tasks';
 import { useDispatch } from 'react-redux';
 import CheckIcon from '@mui/icons-material/Check';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
@@ -16,6 +16,15 @@ function TaskFromContent({ toggleForm, editTask}) {
 
   let dispatch = useDispatch();
 
+  useEffect(() => {
+    if(editTask){
+      setTempTags(editTask.tag);
+      setTaskName(editTask.task_name);
+      setTaskDescription(editTask.task_description);
+    }
+ //eslint-disable-next-line
+  },[])
+
   let handleTags = (e) => {
     e.preventDefault();
     if(!tempTags.includes(newTag)){
@@ -30,12 +39,20 @@ function TaskFromContent({ toggleForm, editTask}) {
   }
 
   let handleSubmit = () => {
+    if(editTask){
+      editTask.task_name = taskName;
+      editTask.task_description = taskDescription;
+      editTask.tag = tempTags;
+      dispatch(updateTask(editTask));
+    }
+    else{
     dispatch(addTask({
       task_name: taskName,
       task_description: taskDescription,
       tracked_time: 0,
       tag: tempTags,
-    }))
+      }))
+    }
     setTempTags([])
     setTaskName('')
     setTaskDescription('')
@@ -74,7 +91,6 @@ function TaskFromContent({ toggleForm, editTask}) {
       }
       <Grid item xs={10} sm={10} md={10} lg={10}>
         {tempTags.map((tag, idx) => {
-          console.log(tag)
           return (<Chip key={idx} label={tag} onDelete={() => handleTagDelete(tag)}></Chip>)
         })}
 
