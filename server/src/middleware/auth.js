@@ -1,36 +1,75 @@
-'use strict';
+"use strict";
 
-// jwt - JSON web token (pronounced JOT)
-const jwt = require('jsonwebtoken');
+/* REQUIRE */
+// jwt - JSON Web Token package
+// pronounced: 'jot'
+const jwt = require("jsonwebtoken");
 
-// jwks - JSON web key set (pronounced Ja-wicks)
-const jwksClient = require('jwks-rsa');
+// jwks - JSON Web Key Set package
+// (pronounced Ja-wicks)
+const jwksClient = require("jwks-rsa");
 
-// the jwks uri come Auth0 account page -> advanced settings -> Endpoints -> 0auth -> JSON Web Key Set
+// don't forget to 'npm i jsonwebtoken jwks-rsa
+
+// the jwks uri comes from Auth0 account page -> advanced settings -> Endpoints -> 0auth -> JSON Web Key Set
 const client = jwksClient({
-  jwksUri: process.env.JWKS_URI
+  jwksUri: process.env.JWKS_URI,
 });
 
-// from the jsonwebtoken docs
+// this function will process the key and do the magic for us
+// function is from the jsonwebtoken docs
 // https://www.npmjs.com/package/jsonwebtoken
 // (search for auth0)
-function getKey(header, callback){
-  client.getSigningKey(header.kid, function(err, key) {
+function getKey(header, callback) {
+  client.getSigningKey(header.kid, function (err, key) {
     let signingKey = key.publicKey || key.rsaPublicKey;
     callback(null, signingKey);
   });
 }
 
-// function to verify the user on our route
+// function to verify's token
 // this is just how we do it
-function verifyUser (req, errorFirstOrUserCallback) {
-  try {
-    const token = req.headers.authorization.split(' ')[1];
-    // the docs
+// errorFirstOrUserCallback is a callback function to just deny a request if the requester isn't who they say they are without even trying to run the function
+/*
+function verifyUser(req, errorFirstOrUserCallback)
+{
+  try
+  {
+    const token = req.headers.authorization.split(' ')[ 1 ];
+    // get the auth0/jwt token from the client's request
+    // the `.verify()` method is from the jwt package we imported/required
+    // `getKey` is the function above this one, from the jwt docs
+    // go to https://www.npmjs.com/package/jsonwebtoken
+    // use `ctrl+f` and search for: `Verify using getKey callback` to get an example
     jwt.verify(token, getKey, {}, errorFirstOrUserCallback);
-  } catch (error) {
-    errorFirstOrUserCallback('not authorized');
+  }
+  catch (error)
+  {
+    errorFirstOrUserCallback("You're not the rat we were expecting");
   }
 }
+*/
+const verifyUser = (req, res, next) => {
+  console.log("in verifyUser");
+  try {
+    if (req.headers.authorization) {
+      console.log("req.headers.authorization: ", req.headers.authorization);
+      const token = req.headers.authorization.split(" ")[1];
+
+      jwt.verify(token, getKey, (err, user) => {
+        if (err) {
+          return res.status(403);
+        }
+        req.user = user; // if we want to do anything with the user or their roles, here it is
+        console.log("req.user: ", req.user);
+        next();
+      });
+    } else {
+      res.status(401);
+    }
+  } catch (err) {
+    next("invalid login");
+  }
+};
 
 module.exports = verifyUser;

@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from "./components/Header/index";
+import Footer from "./components/Footer/index";
+import Main from "./components/Main/index";
+import About from "./components/About/index";
+// import { MyChart } from './components/Progress/PieChart.js';
+import { Progress } from "./components/Progress/Progress";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "./App.scss";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Router>
+        <Header />
+        {/* A <Switch> looks through its children <Route>s and
+          renders the first one that matches the current URL. */}
+        <Routes>
+          <Route path="/about" element={<About />}></Route>
+          <Route path="/progress" element={<Progress />}></Route>
+          <Route path="/" element={<Main />}></Route>
+        </Routes>
+
+        <Footer />
+      </Router>
+    </>
   );
-}
+};
 
 export default App;
