@@ -1,43 +1,39 @@
-'use strict';
+"use strict";
 
-const Messages= require('./Messages/Messages');
-const Tasks= require('./Tasks/Tasks');
-const Users= require('./Users/Users')
+const Tasks = require("./Tasks/Tasks");
+const Users = require("./Users/Users");
 
 class Collection {
-
   constructor(model) {
     this.model = model;
   }
 
-  get(id) {
-    if (id) {
-      return this.model.findOne({ id });
-    }
-    else {
-      return this.model.findAll({});
-    }
+  getOne(id, email) {
+    console.log(id);
+    return this.model.findOne({ _id: id, email: email });
+  }
+
+  getAll(email) {
+    console.log("email in getAll: ", email);
+    return this.model.find({ email: email });
   }
 
   create(record) {
     return this.model.create(record);
   }
 
-  update(id, data) {
-    return this.model.findOne({ where: { id } })
-      .then(record => record.update(data));
+  update(id, email, data) {
+    return this.model.findOneAndUpdate({ _id: id, email: email }, data, {
+      new: true,
+    });
   }
 
-  delete(id) {
-    return this.model.destroy({ where: { id }});
+  delete(id, email) {
+    return this.model.deleteOne({ _id: id, email: email });
   }
-
 }
-
-
 
 module.exports = {
-  Users: new Collection(Users),
-  Tasks: new Collection(Tasks),
-  Messages: new Collection(Messages),
-}
+  users: new Collection(Users),
+  tasks: new Collection(Tasks),
+};
