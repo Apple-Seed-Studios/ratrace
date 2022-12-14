@@ -12,6 +12,11 @@ import {
   DialogContent,
   Fab,
   CardActionArea,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemButton,
+  ListItemIcon,
 } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 import ClearIcon from "@mui/icons-material/Clear";
@@ -148,28 +153,37 @@ const TaskDisplay = function () {
           })}
         </Then>
         <Else>
+          <List>
           {tasks
             .filter((task) => !task.complete)
             .map((task) => {
               return (
-                <Card
-                  variant="outlined"
-                  sx={{ backgroundColor: "#424242", marginBottom: 2 }}
-                  id={task._id}
-                  key={task._id}
-                >
-                  <CardActionArea>
-                    <CardContent
+                // <Card
+                //   variant="outlined"
+                //   sx={{ backgroundColor: "#424242", marginBottom: 2 }}
+                //   id={task._id}
+                //   key={task._id}
+                // >
+                <ListItem>
+                  {/* <CardActionArea> */}
+                    {/* <CardContent
                       onClick={() => {
                         setCurrentEdit(task);
                         setModalOn(true);
                       }}
-                    >
-                      <CardActionArea>
-                        <Typography variant="h5">{task.task_name}</Typography>
-                        <Typography variant="body1">
+                    > */}
+                      {/* <CardActionArea> */}
+                        {/* <Typography variant="h5">{task.task_name}</Typography> */}
+                        <ListItemIcon>                  <Fab
+                    size="small"
+                    onClick={() => dispatch(setActiveTask(task))}
+                  >
+                    <PlayArrowIcon />
+                  </Fab></ListItemIcon>
+                        <ListItemText primary={task.task_name} secondary={task.task_description}></ListItemText>
+                        {/* <Typography variant="body1">
                           {task.task_description}
-                        </Typography>
+                        </Typography> */}
                         {task.tag
                           ? task.tag.map((t) => {
                               return (
@@ -186,24 +200,26 @@ const TaskDisplay = function () {
                             : convertTimeReadable(task.tracked_time)
                                 .minutesSeconds}
                         </Typography>
-                      </CardActionArea>
-                    </CardContent>
-                  </CardActionArea>
-                  <Fab
+                      {/* </CardActionArea> */}
+                    {/* </CardContent> */}
+                  {/* </CardActionArea> */}
+                  {/* <Fab
                     size="small"
                     onClick={() => dispatch(setActiveTask(task))}
                   >
                     <PlayArrowIcon />
-                  </Fab>
+                  </Fab> */}
                   <IconButton onClick={(event) => completeTask(event, task)}>
                     <CheckIcon />
                   </IconButton>
                   <IconButton onClick={() => dispatch(deleteTask(task))}>
                     <ClearIcon />
                   </IconButton>
-                </Card>
+                {/* </Card> */}
+                </ListItem>
               );
             })}
+            </List>
         </Else>
       </If>
       {modalOn ? editForm() : []}
