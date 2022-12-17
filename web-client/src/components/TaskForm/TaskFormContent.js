@@ -6,7 +6,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import Grid from "@mui/material/Unstable_Grid2";
 
-function TaskFromContent({ toggleForm, editTask }) {
+function TaskFormContent({ toggleForm, editTask }) {
   let [tagFormOpen, setTagFormOpen] = useState(false);
   let [tempTags, setTempTags] = useState([]);
   let [taskName, setTaskName] = useState("");
@@ -145,4 +145,4 @@ function TaskFromContent({ toggleForm, editTask }) {
   );
 }
 
-export default TaskFromContent;
+export default TaskFormContent;
