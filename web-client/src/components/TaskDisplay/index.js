@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { convertTimeReadable } from "../../hooks/convertTime";
+import showCompletedHook from '../../hooks/showCompleted';
 import { getTasks, deleteTask, updateTask } from "../../store/tasks";
 import { setActiveTask } from "../../store/activeTask";
 import {
@@ -33,6 +34,7 @@ const TaskDisplay = function () {
   let [modalOn, setModalOn] = useState(false);
   let [currentEdit, setCurrentEdit] = useState([]);
   const [showCompleted, setShowCompleted] = useState(false);
+  let [tasksToDisplay, setTasksToDisplay] = useState(tasks);
 
   useEffect(() => {
     const loadTasks = async () => {
@@ -42,9 +44,14 @@ const TaskDisplay = function () {
     //eslint-disable-next-line
   }, []);
 
+  useEffect(() => {
+    let filteredTasks = showCompletedHook(showCompleted, tasks);
+    setTasksToDisplay(filteredTasks)
+  }, [showCompleted, tasksToDisplay, tasks])
+
   let completeTask = (event, task) => {
     event.preventDefault();
-    task.complete = !task.complete;
+    task.completed = !task.completed;
     dispatch(updateTask(task));
   };
 
@@ -87,7 +94,6 @@ const TaskDisplay = function () {
       <If condition={showCompleted}>
         <Then>
           {tasks.map((task) => {
-            console.log(task.tag);
             return (
               <Card
                 variant="outlined"
@@ -104,7 +110,7 @@ const TaskDisplay = function () {
                   <CardActionArea>
                     <Typography
                       style={
-                        task.complete
+                        task.completed
                           ? completedTextStyle
                           : notCompletedTextStyle
                       }
@@ -114,22 +120,20 @@ const TaskDisplay = function () {
                     </Typography>
                     <Typography
                       style={
-                        task.complete
+                        task.completed
                           ? completedTextStyle
                           : notCompletedTextStyle
                       }
                       variant="body1"
                     >
-                      {task.task_description}
                     </Typography>
                     {task.tag
-                      ? console.log(
+                      ? 
                         task.tag.map((t) => {
                           return (
                             <Typography variant="subtitle2">{t}</Typography>
                           );
                         })
-                      )
                       : []}
                     <Typography variant="subtitle1">
                       {activeTask && task._id === activeTask._id
@@ -155,7 +159,7 @@ const TaskDisplay = function () {
         <Else>
           <List>
             {tasks
-              .filter((task) => !task.complete)
+              .filter((task) => !task.completed)
               .map((task) => {
                 return (
                   <ListItem
