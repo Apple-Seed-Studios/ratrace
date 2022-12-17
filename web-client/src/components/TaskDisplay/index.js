@@ -5,14 +5,9 @@ import showCompletedHook from '../../hooks/showCompleted';
 import { getTasks, deleteTask, updateTask } from "../../store/tasks";
 import { setActiveTask } from "../../store/activeTask";
 import {
-  Card,
-  CardContent,
   Typography,
   IconButton,
-  Dialog,
-  DialogContent,
   Fab,
-  CardActionArea,
   List,
   ListItem,
   ListItemText,
@@ -23,9 +18,8 @@ import CheckIcon from "@mui/icons-material/Check";
 import ClearIcon from "@mui/icons-material/Clear";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import ToggleCompleted from "./ToggleCompleted";
-import { If, Then, Else } from "react-if";
+import EditTaskForm from "./EditTaskForm"
 import "./TaskDisplay.scss";
-import TaskFromContent from "../TaskForm/TaskFormContent";
 
 const TaskDisplay = function () {
   let dispatch = useDispatch();
@@ -47,7 +41,7 @@ const TaskDisplay = function () {
   useEffect(() => {
     let filteredTasks = showCompletedHook(showCompleted, tasks);
     setTasksToDisplay(filteredTasks)
-  }, [showCompleted, tasksToDisplay, tasks])
+  }, [showCompleted, tasks])
 
   let completeTask = (event, task) => {
     event.preventDefault();
@@ -55,20 +49,7 @@ const TaskDisplay = function () {
     dispatch(updateTask(task));
   };
 
-  let editForm = () => {
-    return (
-      <Dialog
-        fullWidth={true}
-        maxWidth={"md"}
-        open={modalOn}
-        onClose={toggleForm}
-      >
-        <DialogContent>
-          <TaskFromContent toggleForm={toggleForm} editTask={currentEdit} />
-        </DialogContent>
-      </Dialog>
-    );
-  };
+
 
   let toggleForm = () => {
     setModalOn(!modalOn);
@@ -90,76 +71,8 @@ const TaskDisplay = function () {
         handleShowCompleted={handleShowCompleted}
         showCompleted={showCompleted}
       />
-
-      <If condition={showCompleted}>
-        <Then>
-          {tasks.map((task) => {
-            return (
-              <Card
-                variant="outlined"
-                sx={{ backgroundColor: "#424242", marginBottom: 2 }}
-                id={task._id}
-                key={task._id}
-              >
-                <CardContent
-                  onClick={() => {
-                    setCurrentEdit(task);
-                    setModalOn(true);
-                  }}
-                >
-                  <CardActionArea>
-                    <Typography
-                      style={
-                        task.completed
-                          ? completedTextStyle
-                          : notCompletedTextStyle
-                      }
-                      variant="h5"
-                    >
-                      {task.task_name}
-                    </Typography>
-                    <Typography
-                      style={
-                        task.completed
-                          ? completedTextStyle
-                          : notCompletedTextStyle
-                      }
-                      variant="body1"
-                    >
-                    </Typography>
-                    {task.tag
-                      ? 
-                        task.tag.map((t) => {
-                          return (
-                            <Typography variant="subtitle2">{t}</Typography>
-                          );
-                        })
-                      : []}
-                    <Typography variant="subtitle1">
-                      {activeTask && task._id === activeTask._id
-                        ? convertTimeReadable(activeTask.tracked_time)
-                          .minutesSeconds
-                        : convertTimeReadable(task.tracked_time).minutesSeconds}
-                    </Typography>
-                  </CardActionArea>
-                </CardContent>
-                <Fab size="small" onClick={() => dispatch(setActiveTask(task))}>
-                  <PlayArrowIcon />
-                </Fab>
-                <IconButton onClick={(event) => completeTask(event, task)}>
-                  <CheckIcon />
-                </IconButton>
-                <IconButton onClick={() => dispatch(deleteTask(task))}>
-                  <ClearIcon />
-                </IconButton>
-              </Card>
-            );
-          })}
-        </Then>
-        <Else>
           <List>
-            {tasks
-              .filter((task) => !task.completed)
+            {tasksToDisplay
               .map((task) => {
                 return (
                   <ListItem
@@ -185,12 +98,21 @@ const TaskDisplay = function () {
                       <ListItemText
                         primary={
                           <React.Fragment>
-                            <Typography variant='h6' sx={{ display: 'inline', }}>
+                            <Typography
+                             variant='h6'
+                             sx={{ display: 'inline', }}
+                             style={task.completed ? completedTextStyle : notCompletedTextStyle}
+                             >
                               {task.task_name + ' '}
                             </Typography>
                             {task.tag.map(tag => {
                               return (
-                                <Typography variant="caption" sx={{ display: 'inline', fontStyle: 'italic' }}>
+                                <Typography
+                                 variant="caption" 
+                                 sx={{ display: 'inline', 
+                                 fontStyle: 'italic' }}
+                                 style={task.completed ? completedTextStyle : notCompletedTextStyle}
+                                 >
                                   #{tag} {' '}
                                 </Typography>
                               )
@@ -198,6 +120,9 @@ const TaskDisplay = function () {
                           </React.Fragment>
                         }
                         secondary={task.task_description}
+                        secondaryTypographyProps={{
+                          style: task.completed ? completedTextStyle : notCompletedTextStyle
+                        }}
                         onClick={() => {
                           setCurrentEdit(task);
                           setModalOn(true);
@@ -215,9 +140,11 @@ const TaskDisplay = function () {
                 );
               })}
           </List>
-        </Else>
-      </If>
-      {modalOn ? editForm() : []}
+      <EditTaskForm
+      modalOn={modalOn}
+      toggleForm={toggleForm}
+      currentEdit={currentEdit}
+      />
     </div>
   );
 };
