@@ -35,10 +35,10 @@ function Header(props) {
               <If condition={isAuthenticated}>
                 <Then>
                   <AvatarPic />
-                  <LogoutButton />
+                  <LogoutButton data-testid='logout_button'/>
                 </Then>
                 <Else>
-                  <LoginNavIcon />
+                  <LoginNavIcon data-testid='login_button'/>
                 </Else>
               </If>
             </Stack>
