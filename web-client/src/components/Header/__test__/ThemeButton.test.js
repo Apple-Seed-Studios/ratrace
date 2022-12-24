@@ -7,6 +7,15 @@ afterEach(() => {
     cleanup();
 })
 
+test('Our Theme Button component should render with the appropriate context', () => {
+    render(
+        <Theme>
+            <ThemeButton/>
+        </Theme>
+    );
+    expect(screen.getByTestId('Brightness7Icon')).toBeInTheDocument();
+})
+
 test('Clicking on the theme button should switch the theme and button icon.', () => {
     render(
     <Theme>
