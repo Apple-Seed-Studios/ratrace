@@ -15,7 +15,8 @@ import {
   ListItemIcon,
 } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
-import ClearIcon from "@mui/icons-material/Clear";
+// import ClearIcon from "@mui/icons-material/Clear";
+import DeleteButton from "./DeleteButton";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import ToggleCompleted from "./ToggleCompleted";
 import EditTaskForm from "./EditTaskForm"
@@ -79,9 +80,11 @@ const TaskDisplay = function () {
                     divider
                     disablePadding
                     secondaryAction={
-                      <IconButton onClick={() => dispatch(deleteTask(task))}>
-                        <ClearIcon />
-                      </IconButton>}
+                      // <IconButton onClick={() => dispatch(deleteTask(task))}>
+                      //   <ClearIcon />
+                      // </IconButton>
+                      <DeleteButton deleteFunction={() => dispatch(deleteTask(task))}></DeleteButton>
+                      }
                   >
                     <ListItemButton>
                       <ListItemIcon>
