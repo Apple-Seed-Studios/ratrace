@@ -6,7 +6,7 @@ const Login = () => {
   const { user, isAuthenticated, isLoading } = useAuth();
 
   if (isLoading) {
-    return <div>Loading ...</div>;
+    return <div data-testid='loading_text'>Loading ...</div>;
   }
   return (
     <When condition={isAuthenticated}>
