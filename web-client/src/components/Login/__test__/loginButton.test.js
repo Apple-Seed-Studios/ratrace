@@ -1,4 +1,4 @@
-import { screen, render, cleanup, fireEvent } from '@testing-library/react';
+import { screen, render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import LoginButton from '../LoginButton';
 
