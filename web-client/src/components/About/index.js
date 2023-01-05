@@ -4,7 +4,7 @@ import { Card, CardContent } from "@mui/material";
 import "./about.scss";
 // import Image from 'react-bootstrap/Image';
 
-function About(props) {
+function About() {
   return (
     <>
       <section>
