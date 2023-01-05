@@ -9,13 +9,13 @@ function ThemeButton() {
   const context = useContext(ThemeContext);
   const theme = useTheme();
   return (
-    <IconButton sx={{ ml: 1 }} color="inherit" onClick={context.toggleDarkMode}>
+    <IconButton sx={{ ml: 1 }} data-testid='brightness_7' color="inherit" onClick={context.toggleDarkMode}>
       <If condition={theme.palette.mode === "dark"}>
         <Then>
           <Brightness7 />
         </Then>
         <Else>
-          <Brightness4 />
+          <Brightness4 data-testid='brightness_4'/>
         </Else>
       </If>
     </IconButton>
