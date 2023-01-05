@@ -10,6 +10,7 @@ function LandingPage() {
         pb: 10,
       }}
       className="landingPage"
+      data-testid='landing_page_box'
     >
       <Container maxWidth="md">
         <Typography
