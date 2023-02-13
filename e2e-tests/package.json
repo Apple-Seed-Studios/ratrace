@@ -1,0 +1,16 @@
+{
+  "name": "rat-race-e2e-tests",
+  "version": "1.0.0",
+  "description": "End-to-end test for the Rat Race Productivity App",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.4.2",
+    "jest-puppeteer": "^7.0.0",
+    "puppeteer": "^19.7.0"
+  }
+}
