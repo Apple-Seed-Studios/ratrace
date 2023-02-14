@@ -140,6 +140,6 @@ dist
 # Ignore all local history of files
 **/.history
 
-
+screenshots/
 jest-html-reporters-attach/
 jest_html_reporters.html
