@@ -2,11 +2,13 @@ Client Tests: ![Client tests passing badge](https://github.com/Apple-Seed-Studio
 
 Server Tests: ![Server tests passing badge](https://github.com/Apple-Seed-Studios/ratrace/actions/workflows/server.node.yml/badge.svg)
 
-# RatRace Todos
+# Rat Race
 
-A todo app that gets you to work!
+Rat Race is feature-rich to-do app with task timers, tags, and graphical time-tracking.
 
 ## Overview
+
+![Rat Race Splash Page](./docs/images/Rat_Race_Splash_Page.png "Rat Race Splash Page")
 
 ## Diagram
 
